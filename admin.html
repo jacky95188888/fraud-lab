@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>發碼台 ｜ 詐騙檢驗所後台</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#ECEAE1;--paper-2:#F5F3EC;--ink:#1B1D1A;--ink-soft:#5A5C55;--stamp:#C8102E;--official:#1F4E79;--mark:#F2C230;--rule:#B9B5A6;--rule-soft:#D8D4C7;--pass:#2E6B4F}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--paper);background-image:linear-gradient(var(--rule-soft) 1px,transparent 1px),linear-gradient(90deg,var(--rule-soft) 1px,transparent 1px);background-size:100% 28px,28px 100%;background-attachment:fixed;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:16px;line-height:1.7}
+.wrap{max-width:620px;margin:0 auto;padding:14px 14px 60px}
+.mono{font-family:"Roboto Mono",monospace}
+h1{font-family:"Noto Serif TC",serif;font-size:30px;margin:0}
+.head{border:2px solid var(--ink);border-bottom-width:5px;background:var(--paper-2);padding:15px 16px}
+.head .eb{font-size:11px;letter-spacing:.34em;color:var(--official);font-weight:700}
+.box{border:2px solid var(--ink);background:var(--paper-2);padding:16px 15px;margin-top:14px}
+label{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--official);display:block;margin-bottom:5px}
+input{width:100%;border:1.5px solid var(--ink);background:#fff;font-family:inherit;font-size:16px;padding:10px 11px;border-radius:2px}
+input:focus{outline:3px solid var(--mark);outline-offset:1px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.btn{display:block;width:100%;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-family:inherit;font-weight:700;font-size:16px;padding:13px;border-radius:3px;cursor:pointer;box-shadow:3px 3px 0 var(--rule);margin-top:14px}
+.btn:active{transform:translate(3px,3px);box-shadow:none}
+.btn.stamp{background:var(--stamp);border-color:var(--stamp);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.5}
+.hint{font-size:13px;color:var(--ink-soft);margin:8px 0 0}
+h2{font-family:"Noto Serif TC",serif;font-size:20px;margin:0 0 10px}
+.card{border:1.5px solid var(--ink);background:#fff;padding:12px 13px;margin-bottom:10px}
+.code{font-family:"Roboto Mono",monospace;font-size:21px;font-weight:700;letter-spacing:.08em;color:var(--stamp)}
+.meta{font-size:12px;color:var(--ink-soft);font-family:"Roboto Mono",monospace;margin-top:2px}
+.acts{display:flex;gap:8px;margin-top:10px}
+.acts button{flex:1;border:1.5px solid var(--ink);background:none;font-family:inherit;font-size:13px;font-weight:700;padding:8px;cursor:pointer;border-radius:2px}
+.acts button.pri{background:var(--mark)}
+.bar{height:8px;border:1.5px solid var(--ink);margin-top:8px}
+.bar i{display:block;height:100%;background:var(--official)}
+.pill{display:inline-block;font-size:11px;font-family:"Roboto Mono",monospace;border:1px solid var(--rule);padding:1px 6px;margin-left:6px;color:var(--ink-soft)}
+.pill.dead{border-color:var(--stamp);color:var(--stamp)}
+.pill.full{border-color:#B8730E;color:#B8730E}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:var(--ink);color:var(--paper);padding:11px 20px;border-radius:3px;font-size:14px;z-index:99;transition:transform .28s;max-width:88vw;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <div class="eb">ADMIN ／ 僅供三寶爸本人使用</div>
+    <h1>發碼台</h1>
+  </header>
+
+  <!-- 登入 -->
+  <section class="box" id="login">
+    <label for="adminKey">管理密碼</label>
+    <input type="password" id="adminKey" placeholder="Worker 裡設的 ADMIN_KEY" autocomplete="off">
+    <button class="btn stamp" id="loginBtn">登入</button>
+    <p class="hint">密碼只存在這支手機上，不會外傳。</p>
+  </section>
+
+  <!-- 發碼 -->
+  <section class="box" id="maker" hidden>
+    <h2>產生兌換碼</h2>
+    <div class="grid">
+      <div><label for="fLimit">每組可用次數</label><input type="number" id="fLimit" value="5" min="1" max="500"></div>
+      <div><label for="fCount">產生幾組</label><input type="number" id="fCount" value="1" min="1" max="50"></div>
+      <div><label for="fDays">有效天數</label><input type="number" id="fDays" value="30" min="1" max="365"></div>
+      <div><label for="fNote">備註（誰拿的）</label><input type="text" id="fNote" placeholder="例：阿姨、社團活動"></div>
+    </div>
+    <button class="btn stamp" id="makeBtn">產生兌換碼</button>
+    <div id="made" style="margin-top:16px"></div>
+  </section>
+
+  <!-- 管理 -->
+  <section class="box" id="manager" hidden>
+    <h2>已發出的碼</h2>
+    <button class="btn ghost" id="listBtn" style="margin-top:0">重新整理清單</button>
+    <div id="list" style="margin-top:14px"></div>
+  </section>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* 換成你的 Worker 網址（不要結尾斜線） */
+const API = "https://YOUR-WORKER.workers.dev";
+/* 換成你的前台網址，會寫進要傳給對方的訊息裡 */
+const SITE = "https://jacky95188888.github.io/fraud-lab/";
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const store = { get(k){try{return localStorage.getItem(k)}catch{return null}}, set(k,v){try{localStorage.setItem(k,v)}catch{}}, del(k){try{localStorage.removeItem(k)}catch{}} };
+let T; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(T);T=setTimeout(()=>t.classList.remove("on"),2600)}
+function copy(text){const done=()=>toast("已複製");if(navigator.clipboard)navigator.clipboard.writeText(text).then(done,()=>fb(text,done));else fb(text,done)}
+function fb(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch{toast("複製失敗")}document.body.removeChild(ta)}
+
+let KEY = store.get("fl_admin") || "";
+
+async function api(path, body) {
+  const res = await fetch(API + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Admin-Key": KEY },
+    body: JSON.stringify(body || {})
+  });
+  let d = {}; try { d = await res.json() } catch {}
+  if (!res.ok) throw new Error(d.error || `錯誤 ${res.status}`);
+  return d;
+}
+
+function enter() {
+  $("#login").hidden = true; $("#maker").hidden = false; $("#manager").hidden = false;
+  loadList();
+}
+
+$("#loginBtn").addEventListener("click", async () => {
+  KEY = $("#adminKey").value.trim();
+  if (!KEY) { toast("請輸入管理密碼"); return; }
+  const b = $("#loginBtn"); b.disabled = true; b.textContent = "驗證中…";
+  try {
+    await api("/admin/list");
+    store.set("fl_admin", KEY);
+    enter(); toast("登入成功");
+  } catch (e) { toast(e.message) }
+  finally { b.disabled = false; b.textContent = "登入" }
+});
+if (KEY) { $("#adminKey").value = KEY; api("/admin/list").then(enter).catch(() => store.del("fl_admin")); }
+
+/* 產生 */
+$("#makeBtn").addEventListener("click", async () => {
+  const b = $("#makeBtn"); b.disabled = true; b.textContent = "產生中…";
+  try {
+    const d = await api("/admin/create", {
+      limit: +$("#fLimit").value, count: +$("#fCount").value,
+      days: +$("#fDays").value, note: $("#fNote").value.trim()
+    });
+    $("#made").innerHTML = `<h2 style="font-size:17px">剛產生的 ${d.codes.length} 組</h2>` + d.codes.map(cardHTML).join("");
+    bindCards($("#made"));
+    loadList();
+    toast("產生完成");
+  } catch (e) { toast(e.message) }
+  finally { b.disabled = false; b.textContent = "產生兌換碼" }
+});
+
+function msgFor(c) {
+  return `【三寶爸 詐騙檢驗所】
+收到可疑訊息不確定？把截圖丟進去，AI 幫你化驗。
+
+網址：${SITE}
+兌換碼：${c.code}
+可用次數：${c.limit} 次（${new Date(c.expiresAt).toLocaleDateString("zh-TW")} 前有效）
+
+用法：打開網址 → 貼上兌換碼 → 上傳對話截圖 → 送出化驗。
+覺得有用，幫我轉給家裡最容易被騙的那一位 🙏`;
+}
+
+function cardHTML(c) {
+  const left = Math.max(0, c.limit - c.used);
+  const pct = c.limit ? (c.used / c.limit * 100) : 0;
+  const dead = c.revoked ? '<span class="pill dead">已停用</span>' : (left === 0 ? '<span class="pill full">已用完</span>' : "");
+  return `<div class="card" data-code="${esc(c.code)}">
+    <div class="code">${esc(c.code)}${dead}</div>
+    <div class="meta">用了 ${c.used} / ${c.limit} ‧ 剩 ${left} 次 ‧ ${new Date(c.expiresAt).toLocaleDateString("zh-TW")} 到期${c.note ? " ‧ " + esc(c.note) : ""}</div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="acts">
+      <button class="pri" data-act="msg">複製發送訊息</button>
+      <button data-act="only">只複製碼</button>
+      ${c.revoked ? "" : '<button data-act="revoke">停用</button>'}
+    </div>
+  </div>`;
+}
+
+let CACHE = {};
+function bindCards(root) {
+  root.querySelectorAll(".card").forEach(card => {
+    const code = card.dataset.code;
+    card.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", async () => {
+      const rec = CACHE[code];
+      if (b.dataset.act === "only") return copy(code);
+      if (b.dataset.act === "msg") {
+        if (!rec) { toast("請先重新整理清單"); return; }
+        return copy(msgFor(rec));
+      }
+      if (b.dataset.act === "revoke") {
+        b.disabled = true; b.textContent = "停用中…";
+        try { await api("/admin/revoke", { code }); toast("已停用"); loadList(); }
+        catch (e) { toast(e.message); b.disabled = false; b.textContent = "停用" }
+      }
+    }));
+  });
+}
+
+async function loadList() {
+  $("#list").innerHTML = '<p class="hint mono">LOADING…</p>';
+  try {
+    const d = await api("/admin/list");
+    CACHE = {};
+    d.codes.forEach(c => CACHE[c.code] = c);
+    $("#list").innerHTML = d.codes.length ? d.codes.map(cardHTML).join("") : '<p class="hint">還沒有發過任何碼。</p>';
+    bindCards($("#list"));
+    bindCards($("#made"));
+  } catch (e) { $("#list").innerHTML = `<p class="hint">${esc(e.message)}</p>` }
+}
+$("#listBtn").addEventListener("click", loadList);
+</script>
+</body>
+</html>
