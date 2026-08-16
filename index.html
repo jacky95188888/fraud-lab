@@ -291,7 +291,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
 /* ═══ 把這行換成你的 Cloudflare Worker 網址（不要結尾斜線）═══ */
 const API = "https://broken-flower-f4b2.jacky9518.workers.dev";
 
-
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const store = { get(k){try{return localStorage.getItem(k)}catch{return null}}, set(k,v){try{localStorage.setItem(k,v)}catch{}}, del(k){try{localStorage.removeItem(k)}catch{}} };
