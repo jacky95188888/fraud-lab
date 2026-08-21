@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>詐騙檢驗所 ｜ 三寶爸防詐工具箱</title>
+<title>反詐實驗室 FRAUD LAB｜AI 科技守護你</title>
 <meta name="description" content="貼上訊息免費快篩，或用 AI 讀截圖深度化驗。附防詐測驗、22 種詐騙手法圖鑑、165 求助流程。">
-<meta name="theme-color" content="#ECEAE1">
-<meta property="og:title" content="詐騙檢驗所 ｜ 貼上訊息，馬上化驗">
+<meta name="theme-color" content="#020b17">
+<meta property="og:title" content="反詐實驗室 FRAUD LAB｜AI 科技守護你">
 <meta property="og:description" content="免費快篩可疑訊息，AI 還能直接讀你的對話截圖。測測你的防詐力幾分。">
 <meta property="og:type" content="website">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23ECEAE1'/%3E%3Ccircle cx='90' cy='90' r='62' fill='none' stroke='%23C8102E' stroke-width='9'/%3E%3Ctext x='90' y='118' font-size='72' font-family='serif' font-weight='bold' fill='%23C8102E' text-anchor='middle'%3E驗%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./master-v3.css?v=7">
 <style>
 :root{--paper:#ECEAE1;--paper-2:#F5F3EC;--ink:#1B1D1A;--ink-soft:#5A5C55;--stamp:#C8102E;--official:#1F4E79;--mark:#F2C230;--rule:#B9B5A6;--rule-soft:#D8D4C7;--pass:#2E6B4F}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -154,7 +155,7 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body>
+<body class="master-v3">
 <div class="wrap">
 
   <header class="masthead">
@@ -688,7 +689,8 @@ const DEX=[
 {n:"假中獎與免費領",tags:["抽獎","運費","問卷"],stat:"付了第一筆運費之後，通常還會有關稅、保證金、稅金等著你，金額越滾越大。",talk:"「恭喜抽中 iPhone，只要付 990 運費」「填問卷免費送」，接著要你的個資和信用卡。",tell:"真正的中獎不會叫你先付錢，也不會需要你的完整卡號和驗證碼。",act:"直接刪除。想確認就去該品牌的官方粉專看有沒有這個活動。"},
 {n:"虛擬貨幣與假交易所",tags:["USDT","出金","私人錢包"],stat:"虛擬貨幣轉帳不可逆、難以追查，是詐團最偏好的收款方式，常與假交友、假投資組合使用。",talk:"「幣圈套利穩賺」「我帶你操作」「把資金匯到不同帳戶才能投資」，或要你交出交易所帳密讓他「代操」。",tell:"帳密交出去就等於錢交出去。大額提領一定會以保證金、認證費、解凍費卡關。",act:"只用有政府登記的交易所，帳密絕不外流。任何要你轉到「私人錢包」的都別碰。"},
 {n:"假官方 LINE 帳號",tags:["假客服","盾牌","無認證"],stat:"許多詐騙的第一步就是把你從官方管道引導到假的 LINE 帳號，之後所有溝通都在他們的場子裡。",talk:"搜尋銀行或平台名稱，跳出好幾個相似帳號，其中一個回應特別快、特別熱心。",tell:"官方帳號有藍色或綠色盾牌認證，假帳號多半是灰色盾牌，好友數也少得可疑。",act:"只從官網或官方 APP 裡的連結加入。加之前先看盾牌顏色。"},
-{n:"遊戲點數與代儲",tags:["點數卡","代儲","序號"],stat:"假客服也常引導受害者到超商購買遊戲點數「解除設定」，因為點數序號一給出去就追不回來。",talk:"「代儲便宜三成」「幫你解鎖帳號，先給我點數卡序號」。",tell:"點數卡序號等於現金。要求「先給序號」的一律是騙。",act:"只在官方通路儲值。小孩的帳號要設定消費密碼。"}
+{n:"遊戲點數與代儲",tags:["點數卡","代儲","序號"],stat:"假客服也常引導受害者到超商購買遊戲點數「解除設定」，因為點數序號一給出去就追不回來。",talk:"「代儲便宜三成」「幫你解鎖帳號，先給我點數卡序號」。",tell:"點數卡序號等於現金。要求「先給序號」的一律是騙。",act:"只在官方通路儲值。小孩的帳號要設定消費密碼。"},
+{n:"假繳費與行動支付",tags:["假帳單","綁卡","行動支付"],stat:"假繳費頁會仿照停車費、電信費、水電費或政府規費頁面，目的通常是竊取信用卡資料、驗證碼或行動支付授權。",talk:"「今日到期，逾期將加收費用」「未繳費將停用服務」，附上一個外觀幾乎和官方相同的付款頁。",tell:"網址不是官方網域、金額刻意很小，或要求重新輸入完整卡號與簡訊驗證碼。小額只是降低戒心，後續可能綁卡或盜刷。",act:"不要從簡訊連結付款；自行開啟官方 APP 或輸入官網網址查帳單。已輸入卡片資料就立刻聯絡發卡銀行停卡並檢查交易。"}
 ];
 function paintDex(kw){
   const list = kw ? DEX.filter(d=>(d.n+d.tags.join("")+d.talk+d.tell+d.stat).includes(kw)) : DEX;
@@ -761,7 +763,8 @@ const ml=document.createElement("link");
 ml.rel="manifest";
 ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:"application/json"}));
 document.head.appendChild(ml);
-if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 </script>
+<script src="./master-v3.js?v=7" defer></script>
 </body>
 </html>
