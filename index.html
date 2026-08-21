@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./master-v3.css?v=9">
+<link rel="stylesheet" href="./master-v3.css?v=10">
 <style>
 :root{--paper:#ECEAE1;--paper-2:#F5F3EC;--ink:#1B1D1A;--ink-soft:#5A5C55;--stamp:#C8102E;--official:#1F4E79;--mark:#F2C230;--rule:#B9B5A6;--rule-soft:#D8D4C7;--pass:#2E6B4F}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -765,13 +765,13 @@ ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:"applicati
 document.head.appendChild(ml);
 if("serviceWorker" in navigator){
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(sessionStorage.getItem("fraud-lab-v9-reloaded"))return;
-    sessionStorage.setItem("fraud-lab-v9-reloaded","1");
+    if(sessionStorage.getItem("fraud-lab-v10-reloaded"))return;
+    sessionStorage.setItem("fraud-lab-v10-reloaded","1");
     location.reload();
   });
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 }
 </script>
-<script src="./master-v3.js?v=9" defer></script>
+<script src="./master-v3.js?v=10" defer></script>
 </body>
 </html>
