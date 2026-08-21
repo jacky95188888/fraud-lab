@@ -73,6 +73,7 @@ body.master-v3:before{
 .mv3-orbit:before{top:13%;left:11%}.mv3-orbit:after{bottom:13%;right:8%}
 .mv3-shield{
   width:220px;height:260px;position:relative;z-index:2;
+  display:grid;place-items:center;
   clip-path:polygon(50% 0,94% 17%,89% 70%,50% 100%,11% 70%,6% 17%);
   background:linear-gradient(145deg,#8cecff,#128cff 40%,#014a9e);
   filter:drop-shadow(0 0 14px #26c9ff) drop-shadow(0 0 38px #087cffaa)
