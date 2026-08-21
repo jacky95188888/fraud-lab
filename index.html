@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./master-v3.css?v=7">
+<link rel="stylesheet" href="./master-v3.css?v=8">
 <style>
 :root{--paper:#ECEAE1;--paper-2:#F5F3EC;--ink:#1B1D1A;--ink-soft:#5A5C55;--stamp:#C8102E;--official:#1F4E79;--mark:#F2C230;--rule:#B9B5A6;--rule-soft:#D8D4C7;--pass:#2E6B4F}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -157,7 +157,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
 </head>
 <body class="master-v3">
 <div class="wrap">
-
   <header class="masthead">
     <i class="corner c1"></i><i class="corner c2"></i>
     <div class="eyebrow">FRAUD LAB ／ 民間自主檢驗</div>
@@ -168,21 +167,18 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
       <span id="docDate">日期 —</span>
     </div>
   </header>
-
   <ul class="tabs" role="tablist">
     <li class="tab" role="tab" tabindex="0" aria-selected="true" data-p="p1"><span class="tnum">01</span>化驗</li>
     <li class="tab" role="tab" tabindex="0" aria-selected="false" data-p="p2"><span class="tnum">02</span>測驗</li>
     <li class="tab" role="tab" tabindex="0" aria-selected="false" data-p="p3"><span class="tnum">03</span>圖鑑</li>
     <li class="tab" role="tab" tabindex="0" aria-selected="false" data-p="p4"><span class="tnum">04</span>求助</li>
   </ul>
-
   <!-- ══ 01 化驗 ══ -->
   <section class="panel" id="p1" role="tabpanel">
     <div class="modes">
       <button id="mbQuick" class="on">快速自檢<span>免費 ‧ 不限次</span></button>
       <button id="mbAI">AI 深度化驗<span>可讀截圖 ‧ 需碼</span></button>
     </div>
-
     <!-- 快速自檢 -->
     <div id="mQuick">
       <label class="field-label" for="qText">檢體：可疑訊息全文</label>
@@ -191,7 +187,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
       <p class="hint" style="margin-top:10px">快篩在你的手機上跑，訊息不會傳出去，也不用兌換碼。它比對的是 165 統計出的詐騙話術特徵，看關鍵字、不懂前後文，所以會有誤判 — 當成第一道警鈴用。</p>
       <div id="qOut"></div>
     </div>
-
     <!-- AI 化驗 -->
     <div id="mAI" hidden>
       <div id="gate">
@@ -205,7 +200,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
         <a class="btn line" href="https://lin.ee/YewRM1L" target="_blank" rel="noopener" style="margin-top:9px">跟三寶爸要一組兌換碼</a>
         <p class="hint" style="margin-top:14px">沒有碼也能用 — 左邊的<b>快速自檢</b>，以及<b>測驗</b>、<b>圖鑑</b>、<b>求助</b>三個分頁，全部免費。</p>
       </div>
-
       <div id="lab" hidden>
         <div class="quota">
           <span class="qc" id="qCode">—</span>
@@ -229,14 +223,12 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
       </div>
     </div>
   </section>
-
   <!-- ══ 02 測驗 ══ -->
   <section class="panel" id="p2" role="tabpanel" hidden>
     <h2 style="font-size:23px">你的防詐力幾分？</h2>
     <p class="hint" style="margin:8px 0 0">十個真實情境，判斷是詐騙還是正常。免費，不用兌換碼。做完會給你一個稱號，歡迎截圖分享。</p>
     <div id="quiz"></div>
   </section>
-
   <!-- ══ 03 圖鑑 ══ -->
   <section class="panel" id="p3" role="tabpanel" hidden>
     <h2 style="font-size:23px">詐騙手法圖鑑</h2>
@@ -244,7 +236,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
     <input type="text" id="dexSearch" placeholder="搜尋手法，例如：投資、包裹、客服、QR">
     <div id="dex" style="margin-top:14px"></div>
   </section>
-
   <!-- ══ 04 求助 ══ -->
   <section class="panel" id="p4" role="tabpanel" hidden>
     <a class="sos" href="tel:165"><span class="n">165</span><br><span class="l">反詐騙諮詢專線 ‧ 點這裡直接撥</span></a>
@@ -277,7 +268,6 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
       </ul>
     </div>
   </section>
-
   <footer class="foot">
     <div style="font-family:'Noto Serif TC',serif;font-weight:900;font-size:19px">多問一句，少賠一年</div>
     <p class="hint" style="color:#C9CBC3;margin:8px 0 0;font-size:14px">覺得有用，轉給家裡最容易被騙的那一位。</p>
@@ -285,13 +275,10 @@ textarea:focus,input:focus{outline:3px solid var(--mark);outline-offset:1px}
     <div class="small">本工具由三寶爸自製，判定僅供參考，無法取代 165 與警方。<br>快篩在你手機上進行；AI 化驗的內容只用於當次分析，不會儲存。<br>手法分類與案件數據參考內政部警政署 165 打詐儀表板。</div>
   </footer>
 </div>
-
 <div id="toast" role="status" aria-live="polite"></div>
-
 <script>
 /* ═══ 把這行換成你的 Cloudflare Worker 網址（不要結尾斜線）═══ */
 const API = "https://broken-flower-f4b2.jacky9518.workers.dev";
-
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const store = { get(k){try{return localStorage.getItem(k)}catch{return null}}, set(k,v){try{localStorage.setItem(k,v)}catch{}}, del(k){try{localStorage.removeItem(k)}catch{}} };
@@ -308,7 +295,6 @@ async function post(path, body){
 (function(){const d=new Date(),p=n=>String(n).padStart(2,"0");
   $("#docDate").textContent=`日期 ${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
   $("#docNo").textContent="單號 FL-"+Math.random().toString(36).slice(2,7).toUpperCase();})();
-
 document.querySelectorAll(".tab").forEach(tab=>{
   const go=()=>{
     document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",String(t===tab)));
@@ -319,7 +305,6 @@ document.querySelectorAll(".tab").forEach(tab=>{
   tab.addEventListener("click",go);
   tab.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
 });
-
 /* ═══════════ 模式切換 ═══════════ */
 $("#mbQuick").addEventListener("click",()=>{
   $("#mbQuick").classList.add("on");$("#mbAI").classList.remove("on");
@@ -329,7 +314,6 @@ $("#mbAI").addEventListener("click",()=>{
   $("#mbAI").classList.add("on");$("#mbQuick").classList.remove("on");
   $("#mAI").hidden=false;$("#mQuick").hidden=true;
 });
-
 /* ═══════════════════════════════════════════════════════
    快速自檢引擎（純前端，不用 API）
    規則依 165 打詐儀表板 22 類手法整理
@@ -393,20 +377,17 @@ const RULES = [
 {t:"通用警訊",w:20,re:/匯(款|入|到)|轉帳|匯至|存入.{0,6}帳[戶號]|臨櫃|現金袋|面交(現金|款)/,f:"要求匯款、轉帳或面交現金。這是所有詐騙的共同終點。"},
 {t:"通用警訊",w:14,re:/加\s?LINE|加賴|加入好友|私訊我|點(擊|選|我)|回[覆傳]\s?1/,f:"引導你加 LINE、點連結，脫離原本的官方管道。"}
 ];
-
 const SHORTS = /(bit\.ly|reurl\.cc|lihi[0-9]?\.(cc|io|cc)|pse\.is|tinyurl\.com|cutt\.ly|is\.gd|t\.ly|goo\.su|myppt\.cc)/i;
 const BADTLD = /https?:\/\/[^\s]*\.(xyz|top|cc|icu|buzz|click|vip|work|rest|cyou|shop|online|site|live)\b/i;
 const HASURL = /(https?:\/\/|www\.|[a-z0-9-]+\.(com|net|org|tw|co|me|info|app)\b)/i;
 const FAKEGOV = /https?:\/\/[^\s]*(post|gov|nhi|etag|etc|tax|police|165)[^\s]*/i;
 const ACCOUNT = /\b\d{10,16}\b/;
-
 function localScan(raw){
   const text = String(raw||"");
   let score = 0;
   const flags = [];
   const seen = new Set();
   const typeScore = {};
-
   for(const r of RULES){
     if(r.re.test(text)){
       score += r.w;
@@ -418,22 +399,18 @@ function localScan(raw){
   if(BADTLD.test(text)){ score+=24; flags.push("連結使用 .xyz／.top／.cc 這類低價網域，詐騙網站大量使用。"); typeScore["釣魚簡訊"]=(typeScore["釣魚簡訊"]||0)+24; }
   if(FAKEGOV.test(text) && !/\.gov\.tw/.test(text)){ score+=26; flags.push("網址裡帶著官方單位的字樣，卻不是 .gov.tw 網域，是冒充的典型。"); typeScore["釣魚簡訊"]=(typeScore["釣魚簡訊"]||0)+26; }
   if(ACCOUNT.test(text) && /匯|轉帳|帳[戶號]/.test(text)){ score+=18; flags.push("訊息裡直接附上一組長串數字帳號，要你匯款。"); }
-
   score = Math.min(100, Math.round(score));
   let type = "無明顯風險";
   let top = 0;
   for(const k in typeScore){ if(typeScore[k]>top && k!=="通用警訊"){ top=typeScore[k]; type=k; } }
   if(type==="無明顯風險" && typeScore["通用警訊"]) type = "有可疑跡象";
-
   return { score, type, flags: flags.slice(0,8) };
 }
-
 const GENERIC_ACTIONS = [
   "先停下來，不要照對方說的做任何操作。",
   "用你自己查到的官方電話回撥確認，不要用訊息裡給的號碼。",
   "還是不確定就打 165，這是免費的，問了不會怎麼樣。"
 ];
-
 $("#qBtn").addEventListener("click", ()=>{
   const text = $("#qText").value.trim();
   if(!text){ toast("先貼上要檢查的訊息"); $("#qText").focus(); return; }
@@ -442,9 +419,7 @@ $("#qBtn").addEventListener("click", ()=>{
   let cls="lv-safe", word="陰性", sub="NEGATIVE";
   if(r.score>=70){cls="";word="陽性";sub="POSITIVE";}
   else if(r.score>=35){cls="lv-warn";word="可疑";sub="SUSPECT";}
-
   const actions = dexHit ? [dexHit.act, ...GENERIC_ACTIONS.slice(1)] : GENERIC_ACTIONS;
-
   $("#qOut").innerHTML = `
   <div class="report">
     <div class="report-head"><b>快篩結果</b><span class="mono" style="font-size:12px">${esc(r.type)}</span></div>
@@ -468,7 +443,6 @@ $("#qBtn").addEventListener("click", ()=>{
       </div>
     </div>
   </div>`;
-
   if(dexHit) $("#toDex").addEventListener("click",()=>openDex(dexHit.n));
   $("#qCopy").addEventListener("click",()=>copy(
     `【詐騙檢驗所 快篩】判定：${word}（風險 ${r.score}/100）\n研判類型：${r.type}\n`+
@@ -477,7 +451,6 @@ $("#qBtn").addEventListener("click", ()=>{
   ));
   $("#qOut").scrollIntoView({behavior:"smooth",block:"start"});
 });
-
 /* ═══════════ 兌換碼 ═══════════ */
 let myCode = store.get("fl_code")||"", myLeft = parseInt(store.get("fl_left")||"0",10);
 function showLab(code,left){
@@ -514,7 +487,6 @@ if(myCode){
   showLab(myCode,myLeft);
   post("/verify",{code:myCode}).then(d=>showLab(myCode,d.remaining)).catch(e=>showGate(e.message));
 }
-
 /* ═══════════ 截圖（先縮圖再送）═══════════ */
 let fileB64=null, fileMime=null;
 $("#shot").addEventListener("change",async e=>{
@@ -547,7 +519,6 @@ function shrink(file){
     img.src=url;
   });
 }
-
 /* ═══════════ AI 化驗 ═══════════ */
 $("#runBtn").addEventListener("click",async()=>{
   const text=$("#sample").value.trim();
@@ -589,7 +560,6 @@ function renderAI(d){
     `\n\n自己也測一下 👉 ${location.href.split("?")[0]}\n三寶爸防詐工具箱 https://lin.ee/YewRM1L`));
   $("#out").scrollIntoView({behavior:"smooth",block:"start"});
 }
-
 /* ═══════════ 02 測驗 ═══════════ */
 const BANK=[
 {s:"【中華郵政】您有一件包裹地址不完整，請於24小時內更新，逾期退回：hxxps://tw-post.xyz/re",from:"簡訊",scam:true,why:"郵局不會用簡訊叫你點連結改地址，正牌網域是 post.gov.tw。怪網域配上「限時」，幾乎都是釣魚。"},
@@ -666,7 +636,6 @@ function showScore(){
   $("#againQ").addEventListener("click",startQuiz);
   $("#shareQ").addEventListener("click",()=>copy(`我的防詐力是 ${qScore}/10，稱號「${t[0]}」。\n${t[1]}\n\n你敢測嗎？👉 ${location.href.split("?")[0]}\n\n#詐騙檢驗所 #三寶爸防詐工具箱`));
 }
-
 /* ═══════════ 03 圖鑑（22 種）═══════════ */
 const DEX=[
 {n:"假投資",tags:["飆股群組","假老師","假APP"],stat:"165 統計 2026 年 1–4 月：受理 5,500 件，財損 94 億 1,219 萬元，是財損金額最高的類型。",talk:"「跟著老師的單，昨天又賺了 18%」、群組人人曬對帳單、要你下載非官方商店的看盤 APP。",tell:"群組裡除了你之外多半是同一夥人。APP 上的數字是寫死的畫面，提領時一定卡住，然後要你先繳保證金、稅金、洗碼量或解凍費。",act:"任何投資平台先到金管會網站查有沒有合法登記。已入金但還沒提領的，立刻停手打 165。"},
@@ -725,7 +694,6 @@ function openDex(name){
 paintDex("");
 let dexTimer;
 $("#dexSearch").addEventListener("input",e=>{clearTimeout(dexTimer);dexTimer=setTimeout(()=>paintDex(e.target.value.trim()),200)});
-
 /* ═══════════ 04 網址快篩 ═══════════ */
 const BAD_TLD=[".xyz",".top",".cc",".icu",".buzz",".shop",".click",".vip",".work",".rest",".cyou",".online",".site"];
 const SHORTENER=["bit.ly","reurl.cc","lihi.cc","lihi.io","lihi1.cc","pse.is","tinyurl.com","t.ly","is.gd","cutt.ly","goo.su","myppt.cc"];
@@ -755,7 +723,6 @@ $("#urlBtn").addEventListener("click",()=>{
     <p class="hint" style="margin:8px 0 0">這是本機的格式檢查，不會連上該網站。要進一步確認，用下面的 Google 安全瀏覽或 VirusTotal 再查一次。</p>
   </div>`;
 });
-
 /* ═══════════ PWA ═══════════ */
 const manifest={name:"詐騙檢驗所",short_name:"防詐檢驗",start_url:".",display:"standalone",background_color:"#ECEAE1",theme_color:"#ECEAE1",
 icons:[{src:"data:image/svg+xml,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#ECEAE1"/><circle cx="256" cy="256" r="176" fill="none" stroke="#C8102E" stroke-width="26"/><text x="256" y="336" font-size="208" font-family="serif" font-weight="bold" fill="#C8102E" text-anchor="middle">驗</text></svg>`),sizes:"512x512",type:"image/svg+xml",purpose:"any"}]};
@@ -765,13 +732,13 @@ ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:"applicati
 document.head.appendChild(ml);
 if("serviceWorker" in navigator){
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(sessionStorage.getItem("fraud-lab-v7-reloaded"))return;
-    sessionStorage.setItem("fraud-lab-v7-reloaded","1");
+    if(sessionStorage.getItem("fraud-lab-v8-reloaded"))return;
+    sessionStorage.setItem("fraud-lab-v8-reloaded","1");
     location.reload();
   });
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
 }
 </script>
-<script src="./master-v3.js?v=7" defer></script>
+<script src="./master-v3.js?v=8" defer></script>
 </body>
 </html>
