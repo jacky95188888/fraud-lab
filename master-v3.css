@@ -72,17 +72,18 @@ body.master-v3:before{
 .mv3-orbit:before,.mv3-orbit:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#28ceff;box-shadow:0 0 16px #28ceff}
 .mv3-orbit:before{top:13%;left:11%}.mv3-orbit:after{bottom:13%;right:8%}
 .mv3-shield{
-  width:220px;height:260px;position:relative;z-index:2;
+  width:330px;height:365px;position:relative;z-index:2;
   display:grid;place-items:center;
-  clip-path:polygon(50% 0,94% 17%,89% 70%,50% 100%,11% 70%,6% 17%);
-  background:linear-gradient(145deg,#8cecff,#128cff 40%,#014a9e);
-  filter:drop-shadow(0 0 14px #26c9ff) drop-shadow(0 0 38px #087cffaa)
+  background:url("./assets/fraud-shield-master.png") center/contain no-repeat;
+  filter:drop-shadow(0 0 18px #26c9ff88) drop-shadow(0 0 42px #087cff66)
 }
 .mv3-shield:before{
+  display:none;
   content:"";position:absolute;inset:4px;clip-path:inherit;
   background:linear-gradient(160deg,#0e4770,#03162c 55%,#063b73)
 }
 .mv3-shield:after{
+  display:none;
   content:"";position:absolute;inset:17px 18px 23px;clip-path:inherit;
   background:
     linear-gradient(90deg,transparent 49.5%,#2ecaff99 50%,transparent 50.5%),
@@ -91,12 +92,14 @@ body.master-v3:before{
   border:1px solid #32c9ff
 }
 .mv3-core{
+  display:none;
   width:82px;height:82px;border:2px solid #8beaff;border-radius:50%;position:relative;z-index:3;
   box-shadow:0 0 30px #21c9ff,inset 0 0 24px #0b8fff;display:grid;place-items:center
 }
 .mv3-core:before{content:"";width:46px;height:46px;border:1px solid #37d3ff;border-radius:50%}
 .mv3-core:after{content:"";position:absolute;width:18px;height:18px;border:4px solid white;border-radius:50%;box-shadow:0 0 18px #fff}
 .mv3-visual:after{
+  display:none;
   content:"";position:absolute;z-index:1;width:330px;height:72px;bottom:24px;border-radius:50%;
   border:2px solid #20caff;background:radial-gradient(ellipse,#087cff66 0,#042849 40%,transparent 70%);
   box-shadow:0 0 18px #13baff,inset 0 0 18px #18c8ff,0 18px 50px #087cff55
@@ -182,7 +185,7 @@ body.master-v3>.wrap .hint,body.master-v3>.wrap .qsrc{color:#91a8ba}
   .mv3-live{width:100%;justify-content:space-between;gap:8px;padding:11px 12px}
   .mv3-visual{height:300px;margin-top:2px}
   .mv3-orbit{width:285px;height:214px}
-  .mv3-shield{width:146px;height:174px}
+  .mv3-shield{width:225px;height:245px}
   .mv3-shield:after{inset:12px 13px 16px}
   .mv3-core{width:58px;height:58px}.mv3-core:before{width:34px;height:34px}.mv3-core:after{width:13px;height:13px;border-width:3px}
   .mv3-visual:after{width:230px;height:48px;bottom:25px}
