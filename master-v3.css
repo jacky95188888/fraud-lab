@@ -235,7 +235,8 @@ body.master-v3>.wrap.mv3-tools-panel{
   border:1px solid #1c5b84;border-radius:20px;
   box-shadow:0 22px 60px #0008,inset 0 1px #ffffff0d
 }
-body.master-v3.mv3-tools-open>.wrap.mv3-tools-panel{display:block}
+body.master-v3.mv3-tools-open>.wrap.mv3-tools-panel{display:block;overflow-x:hidden}
+body.master-v3.mv3-tools-open>.mv3-shell{display:none}
 body.master-v3>.wrap .masthead{display:none}
 body.master-v3>.wrap .mv3-back{
   width:auto;min-height:46px;margin:0 0 12px;padding:10px 15px;
@@ -386,9 +387,23 @@ body.master-v3>.wrap .divider{border-color:#31546c}
   .mv3-support-detail{padding:17px 14px}.mv3-support-detail h4{font-size:18px}.mv3-support-detail p{font-size:12px}
   .mv3-support-detail-actions{display:grid;grid-template-columns:1fr}.mv3-support-detail-actions a,.mv3-support-detail-actions button{text-align:center;font-size:12px}
   .mv3-footer{grid-template-columns:1fr 1fr;gap:18px}.mv3-footer>div:first-child,.mv3-footer>small{grid-column:1/-1}.mv3-footer>div:last-of-type{display:none}
-  body.master-v3>.wrap.mv3-tools-panel{margin:13px 12px 34px;padding:12px;border-radius:15px}
-  body.master-v3>.wrap .tabs{position:sticky;top:0;z-index:20;padding-top:6px}
-  body.master-v3>.wrap .tab{font-size:11px;padding:8px 2px}
+  body.master-v3>.wrap.mv3-tools-panel{margin:8px 10px 34px;padding:10px;border-radius:15px}
+  body.master-v3>.wrap .mv3-back{width:100%;min-height:44px;margin-bottom:9px;font-size:13px}
+  body.master-v3>.wrap .tabs{position:sticky;top:0;z-index:20;gap:3px;padding-top:5px}
+  body.master-v3>.wrap .tab{font-size:11px;padding:8px 1px}
+  body.master-v3>.wrap .panel{padding:17px 12px 20px}
+  body.master-v3>.wrap .panel h2{font-size:22px!important}
+  body.master-v3>.wrap .modes button{min-height:54px;font-size:13px}
+  body.master-v3>.wrap .gate-note{padding:13px}
+  body.master-v3>.wrap .gate-note h3{font-size:18px}
+  body.master-v3>.wrap .gate-note p{font-size:13px}
+  body.master-v3>.wrap .btn{min-height:46px;padding:10px 11px;font-size:14px;box-shadow:0 5px 14px #00101e68}
+  body.master-v3>.wrap #codeIn{font-size:17px;letter-spacing:.08em}
+  body.master-v3>.wrap .dex-btn{min-height:54px;padding:11px 10px;font-size:14px;gap:9px}
+  body.master-v3>.wrap .dex-body{padding:0 11px 13px}
+  body.master-v3>.wrap .dex-body p{font-size:14px}
+  body.master-v3>.wrap .row{flex-wrap:wrap}
+  body.master-v3>.wrap .linklist a{font-size:14px}
 }
 @media(max-width:390px){
   .mv3-shell{padding:0 13px}.mv3-brand small{max-width:185px}
