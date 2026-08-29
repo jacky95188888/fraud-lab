@@ -3,205 +3,205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>發碼台 ｜ 詐騙檢驗所後台</title>
-<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#020b17">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>兌換碼管理台｜反詐實驗室</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#ECEAE1;--paper-2:#F5F3EC;--ink:#1B1D1A;--ink-soft:#5A5C55;--stamp:#C8102E;--official:#1F4E79;--mark:#F2C230;--rule:#B9B5A6;--rule-soft:#D8D4C7;--pass:#2E6B4F}
+:root{--bg:#020b17;--panel:#071828;--panel2:#0a2034;--line:#1f5273;--line2:#163a54;--cyan:#42ccff;--blue:#168cff;--violet:#9873ff;--gold:#ffc857;--green:#45d9a5;--red:#ff4055;--text:#f4fbff;--muted:#94aabd;--shadow:0 22px 70px rgba(0,0,0,.38)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--paper);background-image:linear-gradient(var(--rule-soft) 1px,transparent 1px),linear-gradient(90deg,var(--rule-soft) 1px,transparent 1px);background-size:100% 28px,28px 100%;background-attachment:fixed;color:var(--ink);font-family:"Noto Sans TC",system-ui,sans-serif;font-size:16px;line-height:1.7}
-.wrap{max-width:620px;margin:0 auto;padding:14px 14px 60px}
-.mono{font-family:"Roboto Mono",monospace}
-h1{font-family:"Noto Serif TC",serif;font-size:30px;margin:0}
-.head{border:2px solid var(--ink);border-bottom-width:5px;background:var(--paper-2);padding:15px 16px}
-.head .eb{font-size:11px;letter-spacing:.34em;color:var(--official);font-weight:700}
-.box{border:2px solid var(--ink);background:var(--paper-2);padding:16px 15px;margin-top:14px}
-label{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--official);display:block;margin-bottom:5px}
-input{width:100%;border:1.5px solid var(--ink);background:#fff;font-family:inherit;font-size:16px;padding:10px 11px;border-radius:2px}
-input:focus{outline:3px solid var(--mark);outline-offset:1px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.btn{display:block;width:100%;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-family:inherit;font-weight:700;font-size:16px;padding:13px;border-radius:3px;cursor:pointer;box-shadow:3px 3px 0 var(--rule);margin-top:14px}
-.btn:active{transform:translate(3px,3px);box-shadow:none}
-.btn.stamp{background:var(--stamp);border-color:var(--stamp);color:#fff}
-.btn.ghost{background:transparent;color:var(--ink)}
-.btn:disabled{opacity:.5}
-.hint{font-size:13px;color:var(--ink-soft);margin:8px 0 0}
-h2{font-family:"Noto Serif TC",serif;font-size:20px;margin:0 0 10px}
-.card{border:1.5px solid var(--ink);background:#fff;padding:12px 13px;margin-bottom:10px}
-.code{font-family:"Roboto Mono",monospace;font-size:21px;font-weight:700;letter-spacing:.08em;color:var(--stamp)}
-.meta{font-size:12px;color:var(--ink-soft);font-family:"Roboto Mono",monospace;margin-top:2px}
-.acts{display:flex;gap:8px;margin-top:10px}
-.acts button{flex:1;border:1.5px solid var(--ink);background:none;font-family:inherit;font-size:13px;font-weight:700;padding:8px;cursor:pointer;border-radius:2px}
-.acts button.pri{background:var(--mark)}
-.bar{height:8px;border:1.5px solid var(--ink);margin-top:8px}
-.bar i{display:block;height:100%;background:var(--official)}
-.pill{display:inline-block;font-size:11px;font-family:"Roboto Mono",monospace;border:1px solid var(--rule);padding:1px 6px;margin-left:6px;color:var(--ink-soft)}
-.pill.dead{border-color:var(--stamp);color:var(--stamp)}
-.pill.full{border-color:#B8730E;color:#B8730E}
-#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:var(--ink);color:var(--paper);padding:11px 20px;border-radius:3px;font-size:14px;z-index:99;transition:transform .28s;max-width:88vw;text-align:center}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--text);font-family:"Noto Sans TC",system-ui,sans-serif;background:radial-gradient(circle at 18% 5%,rgba(22,140,255,.13),transparent 30rem),radial-gradient(circle at 88% 38%,rgba(152,115,255,.08),transparent 26rem),linear-gradient(180deg,#020b17,#03101d 58%,#020a13);font-size:16px;line-height:1.65;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;background-image:linear-gradient(rgba(66,204,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(66,204,255,.06) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+button,input{font:inherit}
+button{touch-action:manipulation}
+.wrap{width:min(100% - 28px,920px);margin:0 auto;padding:20px 0 54px;position:relative}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{width:42px;height:48px;display:grid;place-items:center;color:var(--cyan);border:1px solid var(--line);clip-path:polygon(50% 0,95% 18%,88% 72%,50% 100%,12% 72%,5% 18%);background:linear-gradient(145deg,rgba(66,204,255,.13),rgba(152,115,255,.06));font:700 18px "Roboto Mono",monospace;text-shadow:0 0 18px var(--cyan)}
+.brand b{display:block;font-size:17px;letter-spacing:.08em;white-space:nowrap}
+.brand small{display:block;color:var(--muted);font:500 10px "Roboto Mono",monospace;letter-spacing:.18em}
+.private{border:1px solid var(--line);border-radius:99px;padding:7px 11px;color:var(--cyan);font:700 10px "Roboto Mono",monospace;letter-spacing:.12em;background:rgba(8,31,51,.8);white-space:nowrap}
+.hero{border:1px solid var(--line);border-radius:20px;padding:26px clamp(20px,5vw,38px);position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(9,34,55,.96),rgba(4,19,33,.96));box-shadow:var(--shadow)}
+.hero::before{content:"";position:absolute;width:220px;height:220px;right:-90px;top:-110px;border:1px solid rgba(66,204,255,.2);border-radius:50%;box-shadow:0 0 60px rgba(66,204,255,.08),inset 0 0 50px rgba(66,204,255,.05)}
+.eyebrow{color:var(--cyan);font:700 11px "Roboto Mono",monospace;letter-spacing:.22em;margin-bottom:6px}
+h1{font-size:clamp(30px,7vw,48px);line-height:1.18;letter-spacing:.03em;margin:0}
+.hero p{color:var(--muted);margin:9px 0 0;max-width:620px}
+.statusline{display:flex;align-items:center;gap:8px;margin-top:17px;color:var(--muted);font-size:13px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 13px var(--green)}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(8,31,51,.97),rgba(5,20,34,.97));padding:clamp(18px,4vw,28px);margin-top:16px;box-shadow:0 15px 50px rgba(0,0,0,.2);position:relative}
+.panel[hidden],[hidden]{display:none!important}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:19px}
+.kicker{color:var(--cyan);font:700 10px "Roboto Mono",monospace;letter-spacing:.18em;margin-bottom:3px}
+h2{font-size:23px;line-height:1.3;margin:0;letter-spacing:.03em}
+.panel-head p{color:var(--muted);font-size:13px;margin:5px 0 0}
+.iconbox{width:44px;height:44px;display:grid;place-items:center;flex:0 0 auto;border:1px solid var(--line);border-radius:12px;background:rgba(66,204,255,.06);color:var(--cyan);font:700 18px "Roboto Mono",monospace}
+label{display:block;color:#b9d1e2;font-size:12px;font-weight:700;letter-spacing:.1em;margin:0 0 7px}
+.field{position:relative}
+input{width:100%;height:52px;border:1px solid #2c6387;border-radius:11px;background:#03101d;color:var(--text);padding:0 14px;outline:0;transition:border-color .2s,box-shadow .2s}
+input::placeholder{color:#536d80}
+input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(66,204,255,.11),0 0 22px rgba(66,204,255,.07)}
+input[type=password]{padding-right:62px;font-family:"Roboto Mono",monospace;letter-spacing:.08em}
+.peek{position:absolute;right:7px;bottom:7px;height:38px;border:0;border-radius:8px;background:transparent;color:var(--cyan);font-size:12px;font-weight:700;padding:0 10px;cursor:pointer}
+.hint{font-size:12px;color:var(--muted);margin:9px 0 0}
+.remember{display:flex;align-items:center;gap:9px;margin-top:13px;color:var(--muted);font-size:13px;cursor:pointer}
+.remember input{width:18px;height:18px;accent-color:var(--cyan)}
+.btn{min-height:50px;border:1px solid var(--line);border-radius:11px;background:#0b253a;color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:800;cursor:pointer;padding:11px 17px;text-decoration:none;transition:transform .15s,border-color .15s,filter .15s}
+.btn:hover{border-color:var(--cyan)}
+.btn:active{transform:translateY(2px)}
+.btn:disabled{opacity:.5;cursor:wait}
+.btn.primary{width:100%;margin-top:16px;border-color:#2faee0;background:linear-gradient(135deg,#0b92e5,#1867d9);box-shadow:0 9px 24px rgba(12,127,222,.22)}
+.btn.danger{color:#ff91a0;border-color:rgba(255,64,85,.45);background:rgba(255,64,85,.08)}
+.btn.small{min-height:39px;font-size:13px;padding:7px 11px}
+.dashbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(7,24,40,.92)}
+.identity{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.identity strong{color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.span2{grid-column:1/-1}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 18px}
+.preset{border:1px solid var(--line);border-radius:99px;background:rgba(66,204,255,.04);color:#b9d7ea;padding:7px 11px;font-size:12px;font-weight:700;cursor:pointer}
+.preset:hover,.preset.on{border-color:var(--cyan);color:var(--cyan);background:rgba(66,204,255,.1)}
+.made-tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.stat{min-height:79px;border:1px solid var(--line2);border-radius:12px;background:rgba(3,16,29,.65);padding:11px;text-align:center}
+.stat b{display:block;font:700 21px "Roboto Mono",monospace;color:var(--text)}
+.stat small{color:var(--muted);font-size:11px}
+.toolbar{display:grid;grid-template-columns:1fr auto;gap:9px;margin-bottom:13px}
+.toolbar input{height:46px}
+.filters{display:flex;gap:7px;overflow:auto;padding:1px 1px 10px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.filter{flex:0 0 auto;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--muted);padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.filter.on{color:var(--cyan);border-color:var(--cyan);background:rgba(66,204,255,.09)}
+.card{border:1px solid var(--line2);border-radius:14px;background:linear-gradient(135deg,rgba(7,27,45,.95),rgba(3,16,29,.95));padding:15px;margin-bottom:10px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.code{font:700 clamp(17px,5vw,22px) "Roboto Mono",monospace;letter-spacing:.07em;color:var(--cyan);overflow-wrap:anywhere}
+.pill{display:inline-flex;align-items:center;border:1px solid rgba(69,217,165,.45);border-radius:99px;padding:3px 7px;color:var(--green);font:700 10px "Roboto Mono",monospace;white-space:nowrap}
+.pill.dead,.pill.expired{border-color:rgba(255,64,85,.48);color:#ff7a8c}.pill.full{border-color:rgba(255,200,87,.5);color:var(--gold)}
+.meta{font-size:12px;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
+.bar{height:6px;border-radius:99px;background:#102d43;margin-top:11px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--violet));border-radius:inherit}
+.acts{display:grid;grid-template-columns:1.25fr 1fr auto;gap:8px;margin-top:12px}
+.acts button{min-height:41px;border:1px solid var(--line);border-radius:9px;background:rgba(12,43,67,.85);color:var(--text);font-size:12px;font-weight:700;padding:7px;cursor:pointer}
+.acts button.pri{border-color:#288fc0;color:#dff7ff;background:rgba(16,126,185,.23)}
+.acts button.revoke{color:#ff8292;border-color:rgba(255,64,85,.35);background:rgba(255,64,85,.05)}
+.empty{border:1px dashed var(--line);border-radius:12px;text-align:center;padding:30px 15px;color:var(--muted);font-size:13px}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,100px);background:#e9f8ff;color:#04101c;border:1px solid #fff;padding:11px 18px;border-radius:99px;font-size:13px;font-weight:800;z-index:99;transition:transform .28s;max-width:88vw;text-align:center;box-shadow:0 14px 36px rgba(0,0,0,.4)}
 #toast.on{transform:translate(-50%,0)}
+@media(max-width:620px){.wrap{width:min(100% - 20px,920px);padding-top:10px}.topbar{padding:0 4px}.brand b{font-size:14px}.private{font-size:9px;padding:6px 8px}.hero{padding:22px 18px;border-radius:16px}.hero p{font-size:14px}.panel{border-radius:15px;padding:18px 14px}.panel-head{margin-bottom:16px}.grid{grid-template-columns:1fr}.span2{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr}.toolbar .btn{width:100%}.acts{grid-template-columns:1fr 1fr}.acts .revoke{grid-column:1/-1}.dashbar{align-items:flex-start}.identity{align-items:flex-start}.dashbar .btn{min-height:40px}.made-tools .btn{flex:1 1 140px}.card{padding:13px 12px}.code{letter-spacing:.045em}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="head">
-    <div class="eb">ADMIN ／ 僅供三寶爸本人使用</div>
-    <h1>發碼台</h1>
+<main class="wrap">
+  <div class="topbar">
+    <div class="brand"><div class="brand-mark">FL</div><div><b>反詐實驗室</b><small>FRAUD LAB</small></div></div>
+    <div class="private">PRIVATE CONSOLE</div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">REDEEM CODE CONTROL</div>
+    <h1>兌換碼管理台</h1>
+    <p>建立 AI 截圖化驗額度、查看使用狀態與停用兌換碼。此頁僅供三寶爸本人管理。</p>
+    <div class="statusline"><span class="dot"></span><span>後台服務待驗證</span></div>
   </header>
 
-  <!-- 登入 -->
-  <section class="box" id="login">
-    <label for="adminKey">管理密碼</label>
-    <input type="password" id="adminKey" placeholder="Worker 裡設的 ADMIN_KEY" autocomplete="off">
-    <button class="btn stamp" id="loginBtn">登入</button>
-    <p class="hint">密碼只存在這支手機上，不會外傳。</p>
-  </section>
-
-  <!-- 發碼 -->
-  <section class="box" id="maker" hidden>
-    <h2>產生兌換碼</h2>
-    <div class="grid">
-      <div><label for="fLimit">每組可用次數</label><input type="number" id="fLimit" value="5" min="1" max="500"></div>
-      <div><label for="fCount">產生幾組</label><input type="number" id="fCount" value="1" min="1" max="50"></div>
-      <div><label for="fDays">有效天數</label><input type="number" id="fDays" value="30" min="1" max="365"></div>
-      <div><label for="fNote">備註（誰拿的）</label><input type="text" id="fNote" placeholder="例：阿姨、社團活動"></div>
+  <section class="panel" id="login">
+    <div class="panel-head"><div><div class="kicker">SECURE LOGIN</div><h2>管理員登入</h2><p>驗證成功後才會顯示發碼與管理功能。</p></div><div class="iconbox">⌁</div></div>
+    <div class="field">
+      <label for="adminKey">管理密碼</label>
+      <input type="password" id="adminKey" placeholder="輸入 Worker 的 ADMIN_KEY" autocomplete="current-password">
+      <button class="peek" id="peekKey" type="button" aria-label="顯示密碼">顯示</button>
     </div>
-    <button class="btn stamp" id="makeBtn">產生兌換碼</button>
-    <div id="made" style="margin-top:16px"></div>
+    <label class="remember"><input type="checkbox" id="rememberKey">記住這台裝置（未勾選只保留到關閉瀏覽器）</label>
+    <button class="btn primary" id="loginBtn" type="button">驗證並進入管理台</button>
+    <p class="hint">管理密碼只送往反詐實驗室的 Worker 驗證，不會顯示在兌換碼或分享訊息中。</p>
   </section>
 
-  <!-- 管理 -->
-  <section class="box" id="manager" hidden>
-    <h2>已發出的碼</h2>
-    <button class="btn ghost" id="listBtn" style="margin-top:0">重新整理清單</button>
-    <div id="list" style="margin-top:14px"></div>
-  </section>
-</div>
+  <div class="dashbar" id="dashbar" hidden>
+    <div class="identity"><span class="dot"></span><span><strong>管理員已登入</strong><br>可開始建立與管理兌換碼</span></div>
+    <button class="btn danger small" id="logoutBtn" type="button">安全登出</button>
+  </div>
 
+  <section class="panel" id="maker" hidden>
+    <div class="panel-head"><div><div class="kicker">CREATE CODES</div><h2>產生兌換碼</h2><p>每次產生前，先確認使用次數、組數與有效期限。</p></div><div class="iconbox">＋</div></div>
+    <div class="presets" aria-label="快速設定">
+      <button class="preset" type="button" data-limit="1" data-count="1" data-days="7">單次體驗</button>
+      <button class="preset on" type="button" data-limit="5" data-count="1" data-days="30">一般支持者</button>
+      <button class="preset" type="button" data-limit="10" data-count="1" data-days="90">長期使用</button>
+      <button class="preset" type="button" data-limit="5" data-count="10" data-days="30">活動批次</button>
+    </div>
+    <div class="grid">
+      <div><label for="fLimit">每組可用次數</label><input type="number" id="fLimit" value="5" min="1" max="500" inputmode="numeric"></div>
+      <div><label for="fCount">產生幾組</label><input type="number" id="fCount" value="1" min="1" max="50" inputmode="numeric"></div>
+      <div><label for="fDays">有效天數</label><input type="number" id="fDays" value="30" min="1" max="365" inputmode="numeric"></div>
+      <div><label for="fNote">備註（誰拿的）</label><input type="text" id="fNote" maxlength="60" placeholder="例：王小姐、社團活動"></div>
+    </div>
+    <button class="btn primary" id="makeBtn" type="button">確認產生兌換碼</button>
+    <div id="made" hidden></div>
+  </section>
+
+  <section class="panel" id="manager" hidden>
+    <div class="panel-head"><div><div class="kicker">CODE STATUS</div><h2>已發出的碼</h2><p>統計由後台實際資料即時計算，不使用示範數字。</p></div><div class="iconbox">#</div></div>
+    <div class="stats">
+      <div class="stat"><b id="sAll">0</b><small>全部</small></div>
+      <div class="stat"><b id="sActive">0</b><small>可使用</small></div>
+      <div class="stat"><b id="sFull">0</b><small>已用完</small></div>
+      <div class="stat"><b id="sDead">0</b><small>停用／過期</small></div>
+    </div>
+    <div class="toolbar"><input type="text" id="searchCode" placeholder="搜尋兌換碼或備註" aria-label="搜尋兌換碼或備註"><button class="btn small" id="listBtn" type="button">重新整理</button></div>
+    <div class="filters" aria-label="兌換碼狀態篩選">
+      <button class="filter on" type="button" data-filter="all">全部</button>
+      <button class="filter" type="button" data-filter="active">可使用</button>
+      <button class="filter" type="button" data-filter="full">已用完</button>
+      <button class="filter" type="button" data-filter="dead">停用／過期</button>
+    </div>
+    <div id="list"><div class="empty">登入後載入兌換碼。</div></div>
+  </section>
+</main>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* 你的 Worker 網址（已填好，不要結尾斜線） */
-const API = "https://broken-flower-f4b2.jacky9518.workers.dev";
-/* 你的前台網址，會寫進要傳給對方的訊息裡 */
-const SITE = "https://jacky95188888.github.io/fraud-lab/";
+const API="https://broken-flower-f4b2.jacky9518.workers.dev";
+const SITE="https://jacky95188888.github.io/fraud-lab/";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;"}[c]));
+const local={get:k=>{try{return localStorage.getItem(k)}catch{return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch{}},del:k=>{try{localStorage.removeItem(k)}catch{}}};
+const session={get:k=>{try{return sessionStorage.getItem(k)}catch{return null}},set:(k,v)=>{try{sessionStorage.setItem(k,v)}catch{}},del:k=>{try{sessionStorage.removeItem(k)}catch{}}};
+let timer,KEY=session.get("fl_admin")||local.get("fl_admin")||"",CACHE={},FILTER="all",LAST_MADE=[];
+function toast(message){const el=$("#toast");el.textContent=message;el.classList.add("on");clearTimeout(timer);timer=setTimeout(()=>el.classList.remove("on"),2800)}
+function fallbackCopy(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0;left:-9999px";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch{toast("複製失敗，請長按文字複製")}ta.remove()}
+function copy(text){const done=()=>toast("已複製到剪貼簿");if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(done,()=>fallbackCopy(text,done));else fallbackCopy(text,done)}
+async function api(path,body={}){const res=await fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json","X-Admin-Key":KEY},body:JSON.stringify(body)});let data={};try{data=await res.json()}catch{}if(!res.ok)throw new Error(data.error||`後台回應錯誤 ${res.status}`);return data}
+function setConnected(on){$(".statusline span:last-child").textContent=on?"後台服務連線正常":"後台服務待驗證";$("#login").hidden=on;$("#dashbar").hidden=!on;$("#maker").hidden=!on;$("#manager").hidden=!on}
+function saveKey(){session.set("fl_admin",KEY);if($("#rememberKey").checked)local.set("fl_admin",KEY);else local.del("fl_admin")}
+function logout(show=true){KEY="";CACHE={};LAST_MADE=[];session.del("fl_admin");local.del("fl_admin");$("#adminKey").value="";$("#made").hidden=true;$("#made").innerHTML="";setConnected(false);if(show)toast("已安全登出")}
 
-const $ = s => document.querySelector(s);
-const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const store = { get(k){try{return localStorage.getItem(k)}catch{return null}}, set(k,v){try{localStorage.setItem(k,v)}catch{}}, del(k){try{localStorage.removeItem(k)}catch{}} };
-let T; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(T);T=setTimeout(()=>t.classList.remove("on"),2600)}
-function copy(text){const done=()=>toast("已複製");if(navigator.clipboard)navigator.clipboard.writeText(text).then(done,()=>fb(text,done));else fb(text,done)}
-function fb(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch{toast("複製失敗")}document.body.removeChild(ta)}
+$("#peekKey").addEventListener("click",()=>{const input=$("#adminKey"),show=input.type==="password";input.type=show?"text":"password";$("#peekKey").textContent=show?"隱藏":"顯示";$("#peekKey").setAttribute("aria-label",show?"隱藏密碼":"顯示密碼")});
+$("#loginBtn").addEventListener("click",login);
+$("#adminKey").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+$("#logoutBtn").addEventListener("click",()=>logout());
+async function login(){KEY=$("#adminKey").value.trim();if(!KEY)return toast("請先輸入管理密碼");const b=$("#loginBtn");b.disabled=true;b.textContent="正在安全驗證…";try{const data=await api("/admin/list");saveKey();setConnected(true);applyList(data.codes||[]);toast("登入成功")}catch(e){KEY="";toast(e.message)}finally{b.disabled=false;b.textContent="驗證並進入管理台"}}
 
-let KEY = store.get("fl_admin") || "";
+$$('.preset').forEach(b=>b.addEventListener('click',()=>{$$('.preset').forEach(x=>x.classList.remove('on'));b.classList.add('on');$("#fLimit").value=b.dataset.limit;$("#fCount").value=b.dataset.count;$("#fDays").value=b.dataset.days}));
+function intValue(sel,min,max,label){const n=Number($(sel).value);if(!Number.isInteger(n)||n<min||n>max)throw new Error(`${label}需介於 ${min}～${max}`);return n}
+$("#makeBtn").addEventListener("click",async()=>{const b=$("#makeBtn");let payload;try{payload={limit:intValue("#fLimit",1,500,"可用次數"),count:intValue("#fCount",1,50,"產生組數"),days:intValue("#fDays",1,365,"有效天數"),note:$("#fNote").value.trim()}}catch(e){return toast(e.message)}b.disabled=true;b.textContent="正在產生…";try{const data=await api("/admin/create",payload);LAST_MADE=data.codes||[];LAST_MADE.forEach(c=>CACHE[c.code]=c);renderMade();toast(`已產生 ${LAST_MADE.length} 組兌換碼`);await loadList(false)}catch(e){toast(e.message)}finally{b.disabled=false;b.textContent="確認產生兌換碼"}});
+function msgFor(c){return `【三寶爸｜反詐實驗室】\n收到可疑訊息不確定？可將對話截圖交給 AI 協助分析。\n\n網址：${SITE}\n兌換碼：${c.code}\n可用次數：${c.limit} 次\n有效期限：${dateText(c.expiresAt)}\n\n使用方式：開啟網站 → 選擇「AI 截圖化驗」→ 輸入兌換碼 → 上傳截圖。\n\n提醒：AI 分析僅供風險辨識參考；涉及匯款、帳戶或個資時，請撥打 165 或向警方查證。`}
+function dateText(value){const d=new Date(value);return Number.isNaN(d.getTime())?"期限未提供":d.toLocaleDateString("zh-TW")}
+function stateOf(c){const expired=new Date(c.expiresAt).getTime()<Date.now();if(c.revoked||expired)return"dead";if(Math.max(0,c.limit-c.used)===0)return"full";return"active"}
+function statusHTML(c){const expired=!c.revoked&&new Date(c.expiresAt).getTime()<Date.now();if(c.revoked)return'<span class="pill dead">已停用</span>';if(expired)return'<span class="pill expired">已過期</span>';if(stateOf(c)==="full")return'<span class="pill full">已用完</span>';return'<span class="pill">可使用</span>'}
+function cardHTML(c){const left=Math.max(0,Number(c.limit)-Number(c.used)),pct=c.limit?Math.min(100,Number(c.used)/Number(c.limit)*100):0;return `<article class="card" data-code="${esc(c.code)}"><div class="card-top"><div class="code">${esc(c.code)}</div>${statusHTML(c)}</div><div class="meta">已用 ${c.used}／${c.limit}・剩餘 ${left} 次・${dateText(c.expiresAt)} 到期${c.note?"・"+esc(c.note):""}</div><div class="bar"><i style="width:${pct}%"></i></div><div class="acts"><button class="pri" data-act="msg">複製完整訊息</button><button data-act="only">只複製碼</button>${stateOf(c)==="active"?'<button class="revoke" data-act="revoke">停用此碼</button>':""}</div></article>`}
+function bindCards(root){root.querySelectorAll(".card").forEach(card=>card.querySelectorAll("[data-act]").forEach(button=>button.addEventListener("click",async()=>{const code=card.dataset.code,rec=CACHE[code];if(button.dataset.act==="only")return copy(code);if(button.dataset.act==="msg")return rec?copy(msgFor(rec)):toast("找不到這組兌換碼，請重新整理");if(button.dataset.act==="revoke"){if(!confirm(`確定停用 ${code}？停用後使用者將無法再用此碼。`))return;button.disabled=true;button.textContent="停用中…";try{await api("/admin/revoke",{code});toast("兌換碼已停用");await loadList()}catch(e){toast(e.message);button.disabled=false;button.textContent="停用此碼"}}}))) }
+function renderMade(){const root=$("#made");if(!LAST_MADE.length){root.hidden=true;return}root.hidden=false;root.innerHTML=`<div class="made-tools"><button class="btn small" id="copyMadeCodes" type="button">複製全部兌換碼</button><button class="btn small" id="copyMadeMessages" type="button">複製全部發送訊息</button></div>${LAST_MADE.map(cardHTML).join("")}`;bindCards(root);$("#copyMadeCodes").addEventListener("click",()=>copy(LAST_MADE.map(c=>c.code).join("\n")));$("#copyMadeMessages").addEventListener("click",()=>copy(LAST_MADE.map(msgFor).join("\n\n──────────\n\n")));root.scrollIntoView({behavior:"smooth",block:"start"})}
+function applyList(codes){CACHE={};codes.forEach(c=>CACHE[c.code]=c);renderStats(codes);renderList()}
+function renderStats(codes){const counts={all:codes.length,active:0,full:0,dead:0};codes.forEach(c=>counts[stateOf(c)]++);$("#sAll").textContent=counts.all;$("#sActive").textContent=counts.active;$("#sFull").textContent=counts.full;$("#sDead").textContent=counts.dead}
+function renderList(){const query=$("#searchCode").value.trim().toLowerCase();const codes=Object.values(CACHE).filter(c=>(FILTER==="all"||stateOf(c)===FILTER)&&(!query||`${c.code} ${c.note||""}`.toLowerCase().includes(query)));const root=$("#list");root.innerHTML=codes.length?codes.map(cardHTML).join(""):'<div class="empty">沒有符合條件的兌換碼。</div>';bindCards(root)}
+async function loadList(showToast=true){$("#list").innerHTML='<div class="empty">正在讀取後台資料…</div>';try{const data=await api("/admin/list");applyList(data.codes||[]);if(showToast)toast("清單已更新")}catch(e){$("#list").innerHTML=`<div class="empty">${esc(e.message)}</div>`;if(/401|403|密碼|unauthorized/i.test(e.message))logout(false)}}
+$("#listBtn").addEventListener("click",()=>loadList());
+$("#searchCode").addEventListener("input",renderList);
+$$('.filter').forEach(b=>b.addEventListener('click',()=>{$$('.filter').forEach(x=>x.classList.remove('on'));b.classList.add('on');FILTER=b.dataset.filter;renderList()}));
 
-async function api(path, body) {
-  const res = await fetch(API + path, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Admin-Key": KEY },
-    body: JSON.stringify(body || {})
-  });
-  let d = {}; try { d = await res.json() } catch {}
-  if (!res.ok) throw new Error(d.error || `錯誤 ${res.status}`);
-  return d;
-}
-
-function enter() {
-  $("#login").hidden = true; $("#maker").hidden = false; $("#manager").hidden = false;
-  loadList();
-}
-
-$("#loginBtn").addEventListener("click", async () => {
-  KEY = $("#adminKey").value.trim();
-  if (!KEY) { toast("請輸入管理密碼"); return; }
-  const b = $("#loginBtn"); b.disabled = true; b.textContent = "驗證中…";
-  try {
-    await api("/admin/list");
-    store.set("fl_admin", KEY);
-    enter(); toast("登入成功");
-  } catch (e) { toast(e.message) }
-  finally { b.disabled = false; b.textContent = "登入" }
-});
-if (KEY) { $("#adminKey").value = KEY; api("/admin/list").then(enter).catch(() => store.del("fl_admin")); }
-
-/* 產生 */
-$("#makeBtn").addEventListener("click", async () => {
-  const b = $("#makeBtn"); b.disabled = true; b.textContent = "產生中…";
-  try {
-    const d = await api("/admin/create", {
-      limit: +$("#fLimit").value, count: +$("#fCount").value,
-      days: +$("#fDays").value, note: $("#fNote").value.trim()
-    });
-    $("#made").innerHTML = `<h2 style="font-size:17px">剛產生的 ${d.codes.length} 組</h2>` + d.codes.map(cardHTML).join("");
-    bindCards($("#made"));
-    loadList();
-    toast("產生完成");
-  } catch (e) { toast(e.message) }
-  finally { b.disabled = false; b.textContent = "產生兌換碼" }
-});
-
-function msgFor(c) {
-  return `【三寶爸 詐騙檢驗所】
-收到可疑訊息不確定？把截圖丟進去，AI 幫你化驗。
-
-網址：${SITE}
-兌換碼：${c.code}
-可用次數：${c.limit} 次（${new Date(c.expiresAt).toLocaleDateString("zh-TW")} 前有效）
-
-用法：打開網址 → 貼上兌換碼 → 上傳對話截圖 → 送出化驗。
-覺得有用，幫我轉給家裡最容易被騙的那一位 🙏`;
-}
-
-function cardHTML(c) {
-  const left = Math.max(0, c.limit - c.used);
-  const pct = c.limit ? (c.used / c.limit * 100) : 0;
-  const dead = c.revoked ? '<span class="pill dead">已停用</span>' : (left === 0 ? '<span class="pill full">已用完</span>' : "");
-  return `<div class="card" data-code="${esc(c.code)}">
-    <div class="code">${esc(c.code)}${dead}</div>
-    <div class="meta">用了 ${c.used} / ${c.limit} ‧ 剩 ${left} 次 ‧ ${new Date(c.expiresAt).toLocaleDateString("zh-TW")} 到期${c.note ? " ‧ " + esc(c.note) : ""}</div>
-    <div class="bar"><i style="width:${pct}%"></i></div>
-    <div class="acts">
-      <button class="pri" data-act="msg">複製發送訊息</button>
-      <button data-act="only">只複製碼</button>
-      ${c.revoked ? "" : '<button data-act="revoke">停用</button>'}
-    </div>
-  </div>`;
-}
-
-let CACHE = {};
-function bindCards(root) {
-  root.querySelectorAll(".card").forEach(card => {
-    const code = card.dataset.code;
-    card.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", async () => {
-      const rec = CACHE[code];
-      if (b.dataset.act === "only") return copy(code);
-      if (b.dataset.act === "msg") {
-        if (!rec) { toast("請先重新整理清單"); return; }
-        return copy(msgFor(rec));
-      }
-      if (b.dataset.act === "revoke") {
-        b.disabled = true; b.textContent = "停用中…";
-        try { await api("/admin/revoke", { code }); toast("已停用"); loadList(); }
-        catch (e) { toast(e.message); b.disabled = false; b.textContent = "停用" }
-      }
-    }));
-  });
-}
-
-async function loadList() {
-  $("#list").innerHTML = '<p class="hint mono">LOADING…</p>';
-  try {
-    const d = await api("/admin/list");
-    CACHE = {};
-    d.codes.forEach(c => CACHE[c.code] = c);
-    $("#list").innerHTML = d.codes.length ? d.codes.map(cardHTML).join("") : '<p class="hint">還沒有發過任何碼。</p>';
-    bindCards($("#list"));
-    bindCards($("#made"));
-  } catch (e) { $("#list").innerHTML = `<p class="hint">${esc(e.message)}</p>` }
-}
-$("#listBtn").addEventListener("click", loadList);
+if(KEY){$("#adminKey").value=KEY;$("#rememberKey").checked=!!local.get("fl_admin");api("/admin/list").then(data=>{setConnected(true);applyList(data.codes||[])}).catch(()=>logout(false))}
 </script>
 </body>
 </html>
