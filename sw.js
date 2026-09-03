@@ -1,5 +1,5 @@
-const CACHE = "fraud-lab-master-v15";
-const CORE = ["./", "./index.html", "./master-v3.css?v=15", "./master-v3.js?v=15"];
+const CACHE = "fraud-lab-master-v16";
+const CORE = ["./", "./index.html", "./master-v3.css?v=16", "./master-v3.js?v=16"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 async function networkFirst(req){try{const res=await fetch(req,{cache:"no-store"});if(res.ok&&new URL(req.url).origin===location.origin)caches.open(CACHE).then(c=>c.put(req,res.clone()));return res}catch{return(await caches.match(req))||(await caches.match("./index.html"))}}
