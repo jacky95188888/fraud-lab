@@ -69,6 +69,14 @@ input[type=password]{padding-right:62px;font-family:"Roboto Mono",monospace;lett
 .stat{min-height:79px;border:1px solid var(--line2);border-radius:12px;background:rgba(3,16,29,.65);padding:11px;text-align:center}
 .stat b{display:block;font:700 21px "Roboto Mono",monospace;color:var(--text)}
 .stat small{color:var(--muted);font-size:11px}
+.traffic-more{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 19px}
+.traffic-more>div{border:1px solid var(--line2);border-radius:11px;background:rgba(3,16,29,.5);padding:10px 11px}
+.traffic-more span{display:block;color:var(--muted);font-size:10px}.traffic-more b{display:block;margin-top:2px;color:var(--cyan);font:700 18px "Roboto Mono",monospace}
+.traffic-chart-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}.traffic-chart-head strong{font-size:13px}
+.traffic-chart{display:grid;grid-template-columns:repeat(7,1fr);align-items:end;gap:6px;min-height:126px;padding:12px 8px;border:1px solid var(--line2);border-radius:12px;background:rgba(3,16,29,.52)}
+.traffic-day{display:grid;grid-template-rows:1fr auto auto;align-items:end;gap:4px;height:100%;text-align:center}.traffic-bar{width:100%;min-height:4px;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--cyan),#146db8);box-shadow:0 0 12px rgba(66,204,255,.18)}
+.traffic-day b{font:700 10px "Roboto Mono",monospace;color:var(--text)}.traffic-day small{font-size:9px;color:var(--muted)}
+#statsSince{margin:11px 0 0;font-size:11px}
 .toolbar{display:grid;grid-template-columns:1fr auto;gap:9px;margin-bottom:13px}
 .toolbar input{height:46px}
 .filters{display:flex;gap:7px;overflow:auto;padding:1px 1px 10px;scrollbar-width:none}
@@ -90,7 +98,7 @@ input[type=password]{padding-right:62px;font-family:"Roboto Mono",monospace;lett
 .empty{border:1px dashed var(--line);border-radius:12px;text-align:center;padding:30px 15px;color:var(--muted);font-size:13px}
 #toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,100px);background:#e9f8ff;color:#04101c;border:1px solid #fff;padding:11px 18px;border-radius:99px;font-size:13px;font-weight:800;z-index:99;transition:transform .28s;max-width:88vw;text-align:center;box-shadow:0 14px 36px rgba(0,0,0,.4)}
 #toast.on{transform:translate(-50%,0)}
-@media(max-width:620px){.wrap{width:min(100% - 20px,920px);padding-top:10px}.topbar{padding:0 4px}.brand b{font-size:14px}.private{display:none}.front-link{font-size:10px;padding:6px 9px}.hero{padding:22px 18px;border-radius:16px}.hero p{font-size:14px}.panel{border-radius:15px;padding:18px 14px}.panel-head{margin-bottom:16px}.grid{grid-template-columns:1fr}.span2{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr}.toolbar .btn{width:100%}.acts{grid-template-columns:1fr 1fr}.acts .revoke{grid-column:1/-1}.dashbar{align-items:flex-start}.identity{align-items:flex-start}.dashbar .btn{min-height:40px}.made-tools .btn{flex:1 1 140px}.card{padding:13px 12px}.code{letter-spacing:.045em}}
+@media(max-width:620px){.wrap{width:min(100% - 20px,920px);padding-top:10px}.topbar{padding:0 4px}.brand b{font-size:14px}.private{display:none}.front-link{font-size:10px;padding:6px 9px}.hero{padding:22px 18px;border-radius:16px}.hero p{font-size:14px}.panel{border-radius:15px;padding:18px 14px}.panel-head{margin-bottom:16px}.grid{grid-template-columns:1fr}.span2{grid-column:auto}.stats{grid-template-columns:repeat(2,1fr)}.traffic-more{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr}.toolbar .btn{width:100%}.acts{grid-template-columns:1fr 1fr}.acts .revoke{grid-column:1/-1}.dashbar{align-items:flex-start}.identity{align-items:flex-start}.dashbar .btn{min-height:40px}.made-tools .btn{flex:1 1 140px}.card{padding:13px 12px}.code{letter-spacing:.045em}}
 </style>
 </head>
 <body>
@@ -123,6 +131,25 @@ input[type=password]{padding-right:62px;font-family:"Roboto Mono",monospace;lett
     <div class="identity"><span class="dot"></span><span><strong>管理員已登入</strong><br>可開始建立與管理兌換碼</span></div>
     <button class="btn danger small" id="logoutBtn" type="button">安全登出</button>
   </div>
+
+  <section class="panel" id="analytics" hidden>
+    <div class="panel-head"><div><div class="kicker">SITE ANALYTICS</div><h2>網站瀏覽統計</h2><p>從新版啟用後開始記錄；訪客數為匿名裝置估算，不保存姓名、訊息內容或完整 IP。</p></div><div class="iconbox">↗</div></div>
+    <div class="stats traffic-main">
+      <div class="stat"><b id="vToday">0</b><small>今日瀏覽</small></div>
+      <div class="stat"><b id="uWeek">0</b><small>7 日訪客</small></div>
+      <div class="stat"><b id="vMonth">0</b><small>30 日瀏覽</small></div>
+      <div class="stat"><b id="vTotal">0</b><small>累積瀏覽</small></div>
+    </div>
+    <div class="traffic-more">
+      <div><span>快速自檢</span><b id="eQuick">0</b></div>
+      <div><span>AI 化驗完成</span><b id="eAI">0</b></div>
+      <div><span>功能入口點擊</span><b id="eTools">0</b></div>
+      <div><span>分享網站</span><b id="eShare">0</b></div>
+    </div>
+    <div class="traffic-chart-head"><strong>近 7 日趨勢</strong><button class="btn small" id="statsBtn" type="button">更新數據</button></div>
+    <div class="traffic-chart" id="trafficChart"><div class="empty">登入後載入統計。</div></div>
+    <p class="hint" id="statsSince">統計尚未開始。</p>
+  </section>
 
   <section class="panel" id="maker" hidden>
     <div class="panel-head"><div><div class="kicker">CREATE CODES</div><h2>產生兌換碼</h2><p>每次產生前，先確認使用次數、組數與有效期限。</p></div><div class="iconbox">＋</div></div>
@@ -174,7 +201,7 @@ function toast(message){const el=$("#toast");el.textContent=message;el.classList
 function fallbackCopy(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0;left:-9999px";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch{toast("複製失敗，請長按文字複製")}ta.remove()}
 function copy(text){const done=()=>toast("已複製到剪貼簿");if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(done,()=>fallbackCopy(text,done));else fallbackCopy(text,done)}
 async function api(path,body={}){const res=await fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json","X-Admin-Key":KEY},body:JSON.stringify(body)});let data={};try{data=await res.json()}catch{}if(!res.ok||data.error)throw new Error(data.error||`後台回應錯誤 ${res.status}`);return data}
-function setConnected(on){$(".statusline span:last-child").textContent=on?"後台服務連線正常":"後台服務待驗證";$("#login").hidden=on;$("#dashbar").hidden=!on;$("#maker").hidden=!on;$("#manager").hidden=!on}
+function setConnected(on){$(".statusline span:last-child").textContent=on?"後台服務連線正常":"後台服務待驗證";$("#login").hidden=on;$("#dashbar").hidden=!on;$("#analytics").hidden=!on;$("#maker").hidden=!on;$("#manager").hidden=!on}
 function saveKey(){session.set("fl_admin",KEY);if($("#rememberKey").checked)local.set("fl_admin",KEY);else local.del("fl_admin")}
 function logout(show=true){KEY="";CACHE={};LAST_MADE=[];session.del("fl_admin");local.del("fl_admin");$("#adminKey").value="";$("#made").hidden=true;$("#made").innerHTML="";setConnected(false);if(show)toast("已安全登出")}
 
@@ -182,7 +209,7 @@ $("#peekKey").addEventListener("click",()=>{const input=$("#adminKey"),show=inpu
 $("#loginBtn").addEventListener("click",login);
 $("#adminKey").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
 $("#logoutBtn").addEventListener("click",()=>logout());
-async function login(){KEY=$("#adminKey").value.trim();if(!KEY)return toast("請先輸入管理密碼");const b=$("#loginBtn");b.disabled=true;b.textContent="正在安全驗證…";try{const data=await api("/admin/list");saveKey();setConnected(true);applyList(data.codes||[]);toast("登入成功")}catch(e){KEY="";toast(e.message)}finally{b.disabled=false;b.textContent="驗證並進入管理台"}}
+async function login(){KEY=$("#adminKey").value.trim();if(!KEY)return toast("請先輸入管理密碼");const b=$("#loginBtn");b.disabled=true;b.textContent="正在安全驗證…";try{const data=await api("/admin/list");saveKey();setConnected(true);applyList(data.codes||[]);loadAnalytics(false);toast("登入成功")}catch(e){KEY="";toast(e.message)}finally{b.disabled=false;b.textContent="驗證並進入管理台"}}
 
 $$('.preset').forEach(b=>b.addEventListener('click',()=>{$$('.preset').forEach(x=>x.classList.remove('on'));b.classList.add('on');$("#fLimit").value=b.dataset.limit;$("#fCount").value=b.dataset.count;$("#fDays").value=b.dataset.days}));
 function intValue(sel,min,max,label){const n=Number($(sel).value);if(!Number.isInteger(n)||n<min||n>max)throw new Error(`${label}需介於 ${min}～${max}`);return n}
@@ -199,12 +226,28 @@ function renderMade(){const root=$("#made");if(!LAST_MADE.length){root.hidden=tr
 function applyList(codes){CACHE={};codes.forEach(c=>CACHE[c.code]=c);renderStats(codes);renderList()}
 function renderStats(codes){const counts={all:codes.length,active:0,full:0,dead:0};codes.forEach(c=>counts[stateOf(c)]++);$("#sAll").textContent=counts.all;$("#sActive").textContent=counts.active;$("#sFull").textContent=counts.full;$("#sDead").textContent=counts.dead}
 function renderList(){const query=$("#searchCode").value.trim().toLowerCase();const codes=Object.values(CACHE).filter(c=>(FILTER==="all"||stateOf(c)===FILTER)&&(!query||`${c.code} ${c.note||""}`.toLowerCase().includes(query)));const root=$("#list");root.innerHTML=codes.length?codes.map(cardHTML).join(""):'<div class="empty">沒有符合條件的兌換碼。</div>';bindCards(root)}
+function countEvent(group,name){return Number(group?.events?.[name])||0}
+function renderTraffic(data){
+  $("#vToday").textContent=Number(data.today?.pageViews)||0;
+  $("#uWeek").textContent=Number(data.week?.visitors)||0;
+  $("#vMonth").textContent=Number(data.month?.pageViews)||0;
+  $("#vTotal").textContent=Number(data.total?.pageViews)||0;
+  $("#eQuick").textContent=countEvent(data.month,"quick_check");
+  $("#eAI").textContent=countEvent(data.month,"ai_check");
+  $("#eTools").textContent=countEvent(data.month,"tool_open");
+  $("#eShare").textContent=countEvent(data.month,"share");
+  const series=Array.isArray(data.series)?data.series:[],max=Math.max(1,...series.map(day=>Number(day.pageViews)||0));
+  $("#trafficChart").innerHTML=series.length?series.map(day=>{const value=Number(day.pageViews)||0,height=Math.max(value?9:3,Math.round(value/max*72));return `<div class="traffic-day"><i class="traffic-bar" style="height:${height}px"></i><b>${value}</b><small>${esc(String(day.day||"").slice(5).replace("-","/"))}</small></div>`}).join(""):'<div class="empty">統計資料尚未建立。</div>';
+  $("#statsSince").textContent=data.startedAt?`自 ${data.startedAt.replaceAll("-","/")} 起累積；數字不含啟用前的瀏覽。`:"新版部署後收到第一位訪客，就會開始顯示數據。";
+}
+async function loadAnalytics(showToast=true){try{const data=await api("/admin/stats");renderTraffic(data);if(showToast)toast("瀏覽統計已更新")}catch(e){$("#trafficChart").innerHTML=`<div class="empty">${esc(e.message)}<br>請先部署最新版 Worker。</div>`}}
 async function loadList(showToast=true){$("#list").innerHTML='<div class="empty">正在讀取後台資料…</div>';try{const data=await api("/admin/list");applyList(data.codes||[]);if(showToast)toast("清單已更新")}catch(e){$("#list").innerHTML=`<div class="empty">${esc(e.message)}</div>`;if(/401|403|密碼|unauthorized/i.test(e.message))logout(false)}}
 $("#listBtn").addEventListener("click",()=>loadList());
+$("#statsBtn").addEventListener("click",()=>loadAnalytics());
 $("#searchCode").addEventListener("input",renderList);
 $$('.filter').forEach(b=>b.addEventListener('click',()=>{$$('.filter').forEach(x=>x.classList.remove('on'));b.classList.add('on');FILTER=b.dataset.filter;renderList()}));
 
-if(KEY){$("#adminKey").value=KEY;$("#rememberKey").checked=!!local.get("fl_admin");api("/admin/list").then(data=>{setConnected(true);applyList(data.codes||[])}).catch(()=>logout(false))}
+if(KEY){$("#adminKey").value=KEY;$("#rememberKey").checked=!!local.get("fl_admin");api("/admin/list").then(data=>{setConnected(true);applyList(data.codes||[]);loadAnalytics(false)}).catch(()=>logout(false))}
 </script>
 </body>
 </html>
