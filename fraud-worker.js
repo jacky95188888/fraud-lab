@@ -55,6 +55,68 @@ async function loadCode(env,code){
   return{rec};
 }
 
+const TRACK_EVENTS=new Set(["page_view","quick_check","tool_open","code_verify","ai_check","share","support_open"]);
+const taipeiDay=(offset=0)=>{
+  const date=new Date(Date.now()+offset*864e5);
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Taipei",year:"numeric",month:"2-digit",day:"2-digit"}).format(date);
+};
+const cleanMetric=value=>String(value||"").replace(/[^a-zA-Z0-9_\-./]/g,"").slice(0,80);
+async function hashVisitor(value){
+  const bytes=new TextEncoder().encode(String(value||"").slice(0,120));
+  const digest=await crypto.subtle.digest("SHA-256",bytes);
+  return [...new Uint8Array(digest)].slice(0,12).map(byte=>byte.toString(16).padStart(2,"0")).join("");
+}
+async function recordMetric(env,input={}){
+  if(!env.CODES)return;
+  const event=TRACK_EVENTS.has(input.event)?input.event:"";
+  if(!event)return;
+  const day=taipeiDay(),key="stats:day:"+day;
+  let record={day,pageViews:0,visitors:0,events:{},pages:{}};
+  const raw=await env.CODES.get(key);
+  if(raw){try{record={...record,...JSON.parse(raw)}}catch{}}
+  record.events=record.events&&typeof record.events==="object"?record.events:{};
+  record.pages=record.pages&&typeof record.pages==="object"?record.pages:{};
+  record.events[event]=(Number(record.events[event])||0)+1;
+  if(event==="page_view"){
+    record.pageViews=(Number(record.pageViews)||0)+1;
+    const page=cleanMetric(input.page)||"/fraud-lab/";
+    record.pages[page]=(Number(record.pages[page])||0)+1;
+    if(input.visitorId){
+      const visitorKey="stats:visitor:"+day+":"+await hashVisitor(input.visitorId);
+      if(!await env.CODES.get(visitorKey)){
+        record.visitors=(Number(record.visitors)||0)+1;
+        await env.CODES.put(visitorKey,"1",{expirationTtl:172800});
+      }
+    }
+  }
+  await env.CODES.put(key,JSON.stringify(record),{expirationTtl:31968000});
+}
+async function analyticsSummary(env){
+  const records=[];let cursor;
+  do{
+    const page=await env.CODES.list({prefix:"stats:day:",cursor,limit:1000});
+    for(const key of page.keys){
+      const raw=await env.CODES.get(key.name);
+      if(raw){try{records.push(JSON.parse(raw))}catch{}}
+    }
+    cursor=page.list_complete?undefined:page.cursor;
+  }while(cursor);
+  const byDay=new Map(records.map(record=>[record.day,record]));
+  const aggregate=days=>{
+    const start=taipeiDay(-(days-1));
+    return records.filter(record=>record.day>=start).reduce((out,record)=>{
+      out.pageViews+=Number(record.pageViews)||0;out.visitors+=Number(record.visitors)||0;
+      for(const [name,value] of Object.entries(record.events||{}))out.events[name]=(out.events[name]||0)+(Number(value)||0);
+      for(const [name,value] of Object.entries(record.pages||{}))out.pages[name]=(out.pages[name]||0)+(Number(value)||0);
+      return out;
+    },{pageViews:0,visitors:0,events:{},pages:{}});
+  };
+  const total=records.reduce((out,record)=>{out.pageViews+=Number(record.pageViews)||0;out.visitors+=Number(record.visitors)||0;return out},{pageViews:0,visitors:0});
+  const series=[];
+  for(let offset=-6;offset<=0;offset++){const day=taipeiDay(offset),record=byDay.get(day)||{};series.push({day,pageViews:Number(record.pageViews)||0,visitors:Number(record.visitors)||0})}
+  return{today:aggregate(1),week:aggregate(7),month:aggregate(30),total,series,startedAt:records.map(r=>r.day).sort()[0]||null};
+}
+
 export default{
   async fetch(request,env){
     const H=cors(env.ALLOW_ORIGIN||"*");
@@ -74,10 +136,20 @@ async function handle(request,env,H){
   let body={};
   try{body=await request.json()}catch{}
 
+  if(path==="/track"){
+    const requestOrigin=request.headers.get("Origin");
+    if(env.ALLOW_ORIGIN&&requestOrigin&&requestOrigin!==env.ALLOW_ORIGIN)return json({error:"Origin not allowed"},403,H);
+    if(!env.CODES)return json({ok:false},202,H);
+    await recordMetric(env,body);
+    return json({ok:true},202,H);
+  }
+
   if(path.startsWith("/admin/")){
     if(!env.ADMIN_KEY||request.headers.get("X-Admin-Key")!==env.ADMIN_KEY)return json({error:"管理密碼錯誤。"},401,H);
     const missing=bindingError(env,"CODES");
     if(missing)return json({error:missing},500,H);
+
+    if(path==="/admin/stats")return json({ok:true,...await analyticsSummary(env)},200,H);
 
     if(path==="/admin/create"){
       const count=Math.min(50,Math.max(1,parseInt(body.count,10)||1));
@@ -171,6 +243,7 @@ async function handle(request,env,H){
     const raw=data?.candidates?.[0]?.content?.parts?.map(part=>part.text||"").join("")||"";
     let output;
     try{output=JSON.parse(raw.replace(/```json|```/g,"").trim())}catch{await refund();return json({error:"分析結果讀取失敗，這次不扣次數，請重送一次。"},502,H)}
+    await recordMetric(env,{event:"ai_check",page:"/fraud-lab/"});
     return json({
       score:Math.max(0,Math.min(100,parseInt(output.score,10)||0)),type:output.type||"未分類",
       readout:output.readout||"",summary:output.summary||"",redFlags:Array.isArray(output.redFlags)?output.redFlags.slice(0,8):[],
