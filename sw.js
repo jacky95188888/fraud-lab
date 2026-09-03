@@ -1,4 +1,4 @@
-const CACHE = "fraud-lab-master-v17";
+const CACHE = "fraud-lab-master-v18";
 const CORE = ["./", "./index.html", "./master-v3.css?v=16", "./master-v3.js?v=16"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
