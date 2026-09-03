@@ -136,6 +136,13 @@ async function handle(request,env,H){
   let body={};
   try{body=await request.json()}catch{}
 
+  if(path==="/stats"){
+    if(!env.CODES)return json({error:"統計服務尚未完成設定。"},503,H);
+    const summary=await analyticsSummary(env);
+    const safeGroup=group=>({pageViews:group.pageViews,visitors:group.visitors,events:group.events});
+    return json({ok:true,today:safeGroup(summary.today),week:safeGroup(summary.week),month:safeGroup(summary.month),total:summary.total,series:summary.series,startedAt:summary.startedAt},200,H);
+  }
+
   if(path==="/track"){
     const requestOrigin=request.headers.get("Origin");
     if(env.ALLOW_ORIGIN&&requestOrigin&&requestOrigin!==env.ALLOW_ORIGIN)return json({error:"Origin not allowed"},403,H);
