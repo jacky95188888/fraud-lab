@@ -132,8 +132,8 @@ input[type=password]{padding-right:62px;font-family:"Roboto Mono",monospace;lett
     <button class="btn danger small" id="logoutBtn" type="button">安全登出</button>
   </div>
 
-  <section class="panel" id="analytics" hidden>
-    <div class="panel-head"><div><div class="kicker">SITE ANALYTICS</div><h2>網站瀏覽統計</h2><p>從新版啟用後開始記錄；訪客數為匿名裝置估算，不保存姓名、訊息內容或完整 IP。</p></div><div class="iconbox">↗</div></div>
+  <section class="panel" id="analytics">
+    <div class="panel-head"><div><div class="kicker">SITE ANALYTICS</div><h2>網站瀏覽統計</h2><p>免登入即可查看匿名彙總數字；訪客數為裝置估算，不保存姓名、訊息內容或完整 IP。發碼及停用功能仍需管理密碼。</p></div><div class="iconbox">↗</div></div>
     <div class="stats traffic-main">
       <div class="stat"><b id="vToday">0</b><small>今日瀏覽</small></div>
       <div class="stat"><b id="uWeek">0</b><small>7 日訪客</small></div>
@@ -201,7 +201,8 @@ function toast(message){const el=$("#toast");el.textContent=message;el.classList
 function fallbackCopy(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0;left:-9999px";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch{toast("複製失敗，請長按文字複製")}ta.remove()}
 function copy(text){const done=()=>toast("已複製到剪貼簿");if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(done,()=>fallbackCopy(text,done));else fallbackCopy(text,done)}
 async function api(path,body={}){const res=await fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json","X-Admin-Key":KEY},body:JSON.stringify(body)});let data={};try{data=await res.json()}catch{}if(!res.ok||data.error)throw new Error(data.error||`後台回應錯誤 ${res.status}`);return data}
-function setConnected(on){$(".statusline span:last-child").textContent=on?"後台服務連線正常":"後台服務待驗證";$("#login").hidden=on;$("#dashbar").hidden=!on;$("#analytics").hidden=!on;$("#maker").hidden=!on;$("#manager").hidden=!on}
+async function publicApi(path,body={}){const res=await fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});let data={};try{data=await res.json()}catch{}if(!res.ok||data.error)throw new Error(data.error||`統計回應錯誤 ${res.status}`);return data}
+function setConnected(on){$(".statusline span:last-child").textContent=on?"後台服務連線正常":"後台服務待驗證";$("#login").hidden=on;$("#dashbar").hidden=!on;$("#maker").hidden=!on;$("#manager").hidden=!on}
 function saveKey(){session.set("fl_admin",KEY);if($("#rememberKey").checked)local.set("fl_admin",KEY);else local.del("fl_admin")}
 function logout(show=true){KEY="";CACHE={};LAST_MADE=[];session.del("fl_admin");local.del("fl_admin");$("#adminKey").value="";$("#made").hidden=true;$("#made").innerHTML="";setConnected(false);if(show)toast("已安全登出")}
 
@@ -240,14 +241,15 @@ function renderTraffic(data){
   $("#trafficChart").innerHTML=series.length?series.map(day=>{const value=Number(day.pageViews)||0,height=Math.max(value?9:3,Math.round(value/max*72));return `<div class="traffic-day"><i class="traffic-bar" style="height:${height}px"></i><b>${value}</b><small>${esc(String(day.day||"").slice(5).replace("-","/"))}</small></div>`}).join(""):'<div class="empty">統計資料尚未建立。</div>';
   $("#statsSince").textContent=data.startedAt?`自 ${data.startedAt.replaceAll("-","/")} 起累積；數字不含啟用前的瀏覽。`:"新版部署後收到第一位訪客，就會開始顯示數據。";
 }
-async function loadAnalytics(showToast=true){try{const data=await api("/admin/stats");renderTraffic(data);if(showToast)toast("瀏覽統計已更新")}catch(e){$("#trafficChart").innerHTML=`<div class="empty">${esc(e.message)}<br>請先部署最新版 Worker。</div>`}}
+async function loadAnalytics(showToast=true){try{const data=await publicApi("/stats");renderTraffic(data);if(showToast)toast("瀏覽統計已更新")}catch(e){$("#trafficChart").innerHTML=`<div class="empty">${esc(e.message)}<br>請先部署最新版 Worker。</div>`}}
 async function loadList(showToast=true){$("#list").innerHTML='<div class="empty">正在讀取後台資料…</div>';try{const data=await api("/admin/list");applyList(data.codes||[]);if(showToast)toast("清單已更新")}catch(e){$("#list").innerHTML=`<div class="empty">${esc(e.message)}</div>`;if(/401|403|密碼|unauthorized/i.test(e.message))logout(false)}}
 $("#listBtn").addEventListener("click",()=>loadList());
 $("#statsBtn").addEventListener("click",()=>loadAnalytics());
 $("#searchCode").addEventListener("input",renderList);
 $$('.filter').forEach(b=>b.addEventListener('click',()=>{$$('.filter').forEach(x=>x.classList.remove('on'));b.classList.add('on');FILTER=b.dataset.filter;renderList()}));
 
-if(KEY){$("#adminKey").value=KEY;$("#rememberKey").checked=!!local.get("fl_admin");api("/admin/list").then(data=>{setConnected(true);applyList(data.codes||[]);loadAnalytics(false)}).catch(()=>logout(false))}
+loadAnalytics(false);
+if(KEY){$("#adminKey").value=KEY;$("#rememberKey").checked=!!local.get("fl_admin");api("/admin/list").then(data=>{setConnected(true);applyList(data.codes||[]) }).catch(()=>logout(false))}
 </script>
 </body>
 </html>
