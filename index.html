@@ -305,6 +305,26 @@ async function post(path, body){
   if(!res.ok) throw new Error(d.error || `伺服器忙線中（${res.status}），請稍後再試。`);
   return d;
 }
+const metricStore={get:k=>{try{return localStorage.getItem(k)}catch{return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch{}}};
+function anonymousVisitor(){
+  let id=metricStore.get("fl_visitor_id");
+  if(!id){id=crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+"-"+Math.random().toString(36).slice(2);metricStore.set("fl_visitor_id",id)}
+  return id;
+}
+function track(event,extra={}){
+  const payload={event,visitorId:anonymousVisitor(),page:location.pathname,...extra};
+  fetch(API+"/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true}).catch(()=>{});
+}
+window.addEventListener("load",()=>track("page_view"),{once:true});
+document.addEventListener("click",event=>{
+  const target=event.target.closest("button,a,[data-tab]");
+  if(!target)return;
+  if(target.id==="qBtn")track("quick_check");
+  else if(target.id==="codeBtn")track("code_verify");
+  else if(target.id==="mv3Share")track("share");
+  else if(target.id==="mv3SupportOpen")track("support_open");
+  else if(target.closest(".mv3-card"))track("tool_open");
+});
 (function(){const d=new Date(),p=n=>String(n).padStart(2,"0");
   $("#docDate").textContent=`日期 ${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
   $("#docNo").textContent="單號 FL-"+Math.random().toString(36).slice(2,7).toUpperCase();})();
@@ -765,8 +785,8 @@ ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:"applicati
 document.head.appendChild(ml);
 if("serviceWorker" in navigator){
   navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(sessionStorage.getItem("fraud-lab-v11-reloaded"))return;
-    sessionStorage.setItem("fraud-lab-v11-reloaded","1");
+    if(sessionStorage.getItem("fraud-lab-v17-reloaded"))return;
+    sessionStorage.setItem("fraud-lab-v17-reloaded","1");
     location.reload();
   });
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
