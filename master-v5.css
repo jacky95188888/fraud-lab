@@ -1,0 +1,43 @@
+/* FRAUD LAB MASTER V5 — mobile precision pass */
+@media (max-width:640px){
+  .mv3-copy h1{font-size:29px!important;line-height:1.02!important;letter-spacing:-.045em!important}
+  .mv3-copy h1 span{display:block!important;white-space:nowrap!important;font-size:27px!important;letter-spacing:-.055em!important}
+  .mv3-lead{margin:7px 0 8px!important;font-size:11px!important}
+  .mv3-points{gap:4px!important}
+  .mv3-points span{padding:5px 6px!important}
+  .mv3-note{margin-top:8px!important}
+
+  .mv3-visual{height:236px!important}
+  .mv3-bot{width:118px!important;height:134px!important;left:6%!important;top:23%!important}
+  .mv3-shield{width:145px!important;height:164px!important;right:0!important;bottom:6%!important}
+  .mv3-float{font-size:6.5px!important}
+
+  .mv3-checkbox{margin-bottom:15px!important}
+  .mv3-checkbody textarea{min-height:96px!important;max-height:120px!important}
+  .mv3-checkactions{margin-top:7px!important}
+  .mv3-samples{margin-top:7px!important}
+
+  .mv3-verify{padding-top:8px!important}
+  .mv3-verifygrid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;overflow:visible!important;padding:0!important}
+  .mv3-verifygrid article,.mv3-verifygrid article:last-child{min-height:106px!important;padding:10px!important;display:block!important;grid-column:auto!important}
+  .mv3-verifygrid article:last-child{grid-column:1/-1!important;min-height:82px!important;display:grid!important;grid-template-columns:34px 1fr!important;grid-template-rows:auto auto!important;column-gap:6px!important;align-items:center!important}
+  .mv3-verifygrid article:last-child i{grid-row:1/3!important;margin:0!important}
+  .mv3-verifygrid article:last-child b{margin:0!important}
+  .mv3-verifygrid article:last-child p{margin:0!important}
+  .mv3-verifygrid i{margin-bottom:6px!important}
+  .mv3-verifygrid b{font-size:14px!important}
+  .mv3-verifygrid p{font-size:9px!important;line-height:1.45!important}
+  .mv3-trustbar{margin:7px 0 13px!important}
+
+  .mv3-toolgrid{gap:7px!important;margin:8px 0 14px!important}
+  .mv3-toolcard{min-height:112px!important;padding:9px!important}
+  .mv3-toolicon{width:36px!important;height:36px!important;font-size:16px!important;margin-bottom:6px!important}
+  .mv3-toolcard h3{font-size:13px!important}
+  .mv3-toolcard p{font-size:8.5px!important;min-height:32px!important;line-height:1.4!important}
+  .mv3-toolcard>b{margin-top:3px!important}
+
+  .mv3-lower{gap:7px!important;margin-top:8px!important}
+  .mv3-lower article{padding:10px!important}
+  .mv3-emergency{margin:9px 0!important}
+  .mv3-support{margin-bottom:12px!important}
+}
