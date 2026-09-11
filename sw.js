@@ -1,5 +1,5 @@
-const CACHE = "fraud-lab-master-v23";
-const CORE = ["./", "./index.html", "./master-v3.css?v=22", "./master-v5.css?v=23", "./master-v3.js?v=16", "./quickscan-v2.js?v=19"];
+const CACHE = "fraud-lab-master-v24";
+const CORE = ["./", "./index.html", "./master-v3.css?v=24", "./master-v3.js?v=16", "./quickscan-v2.js?v=19"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 async function networkFirst(req){try{const res=await fetch(req,{cache:"no-store"});if(res.ok&&new URL(req.url).origin===location.origin)caches.open(CACHE).then(c=>c.put(req,res.clone()));return res}catch{return(await caches.match(req))||(await caches.match("./index.html"))}}
@@ -9,10 +9,10 @@ async function pageWithQuickScan(req){
   const type=res.headers.get("content-type")||"";
   if(!type.includes("text/html"))return res;
   let html=await res.clone().text();
-  html=html.replace(/\.\/master-v3\.css\?v=\d+/g,"./master-v3.css?v=22");
-  if(!html.includes("master-v5.css"))html=html.replace("</head>",'<link rel="stylesheet" href="./master-v5.css?v=23"></head>');
+  html=html.replace(/\.\/master-v3\.css\?v=\d+/g,"./master-v3.css?v=24");
+  html=html.replace(/<link[^>]+master-v5\.css[^>]*>/g,"");
   if(!html.includes("quickscan-v2.js"))html=html.replace("</body>",'<script src="./quickscan-v2.js?v=19"></script></body>');
   const headers=new Headers(res.headers);headers.delete("content-length");
   return new Response(html,{status:res.status,statusText:res.statusText,headers});
 }
-self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET"||req.url.includes("/check"))return;const url=new URL(req.url);if(req.mode==="navigate"||url.pathname.endsWith(".html")||url.pathname.endsWith("/"))return e.respondWith(pageWithQuickScan(req));if(/\/(master-v(3|5)\.css|master-v3\.js|quickscan-v2\.js|sw\.js)$/.test(url.pathname))return e.respondWith(networkFirst(req));e.respondWith(caches.match(req).then(hit=>hit||networkFirst(req)))});
+self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET"||req.url.includes("/check"))return;const url=new URL(req.url);if(req.mode==="navigate"||url.pathname.endsWith(".html")||url.pathname.endsWith("/"))return e.respondWith(pageWithQuickScan(req));if(/\/(master-v3\.css|master-v3\.js|quickscan-v2\.js|sw\.js)$/.test(url.pathname))return e.respondWith(networkFirst(req));e.respondWith(caches.match(req).then(hit=>hit||networkFirst(req)))});
