@@ -458,3 +458,40 @@ body.master-v3{background:
  .mv3-shield{animation:mv3FloatMobile 4.8s ease-in-out infinite}
  @keyframes mv3FloatMobile{50%{transform:translateY(-15px)}}
 }
+
+
+/* V4 polish — functional cards / emergency / cases / community support */
+.mv3-tools-head{position:relative;margin-top:14px;padding:28px 0 18px}
+.mv3-tools-head:before{content:"";position:absolute;left:50%;top:0;width:190px;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#26c7ff,transparent);box-shadow:0 0 16px #26c7ff}
+.mv3-tools-head small{text-shadow:0 0 14px #26c7ff88}
+.mv3-card{min-height:142px}
+.mv3-card h3{font-family:"Noto Serif TC",serif;text-shadow:0 2px 18px #000}
+.mv3-card p{color:#a7bdcc}
+.mv3-card button{box-shadow:inset 0 1px #ffffff32,0 0 20px color-mix(in srgb,var(--tool) 17%,transparent),0 8px 22px #0008}
+.mv3-stats{position:relative;background:linear-gradient(145deg,#061a2bde,#03101ddd);border-color:#2278a7}
+.mv3-stat{position:relative;min-height:112px;display:grid;align-content:center}
+.mv3-stat:after{content:"";position:absolute;left:25%;right:25%;bottom:9px;height:1px;background:linear-gradient(90deg,transparent,#26c7ff55,transparent)}
+.mv3-stat b{text-shadow:0 0 18px #26c7ff22}
+.mv3-emergency{position:relative;border-color:#277dab;background:linear-gradient(135deg,#071b2dde,#03101ddd);box-shadow:0 22px 55px #0007,inset 0 1px #ffffff0d}
+.mv3-emergency:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 0 62%,#ff52650b 100%)}
+.mv3-help h3{font-family:"Noto Serif TC",serif;line-height:1.55}
+.mv3-call{font-weight:800;box-shadow:0 10px 28px #087cff55,inset 0 1px #ffffff30}
+.mv3-news h4{color:#f2f9ff;font-size:17px}
+.mv3-news div{position:relative;padding:11px 0;color:#afc3d1}
+.mv3-news em{box-shadow:0 0 14px #ff405544}
+.mv3-support{position:relative;overflow:hidden;border-color:#287aa8;background:radial-gradient(circle at 94% 8%,#0b6fa24c,transparent 35%),linear-gradient(145deg,#071b2c,#03101d)}
+.mv3-support:before{content:"";position:absolute;right:-72px;top:-92px;width:230px;height:230px;border:1px solid #26c7ff1f;border-radius:50%;box-shadow:0 0 0 28px #26c7ff0a,0 0 0 58px #26c7ff07}
+.mv3-support>*{position:relative;z-index:1}
+.mv3-support>small{text-shadow:0 0 16px #26c7ff}
+.mv3-support>h3{font-family:"Noto Serif TC",serif;font-size:25px}
+.mv3-support-actions button{min-height:48px}
+.mv3-support-actions button:first-child{box-shadow:0 10px 28px #087cff45,inset 0 1px #ffffff28}
+.mv3-footer{margin-top:34px}
+@media(max-width:760px){
+ .mv3-tools-head{padding:22px 0 13px}
+ .mv3-card{min-height:112px}
+ .mv3-stat{min-height:96px}
+ .mv3-emergency{border-radius:18px}
+ .mv3-support{border-radius:18px;padding:22px 18px}
+ .mv3-support>h3{font-size:22px}
+}
