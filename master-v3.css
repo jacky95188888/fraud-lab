@@ -423,3 +423,38 @@ body.master-v3>.wrap .divider{border-color:#31546c}
   .mv3-card{min-height:102px;grid-template-columns:78px minmax(0,1fr) 38px;column-gap:9px}.mv3-icon{width:72px;height:72px}.mv3-card:after{left:89px}.mv3-card h3{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* FRAUD LAB VISUAL V4 — 2026-09-22
+   Generated visual DNA:
+   #010814/#031526 cyber navy, #26c7ff/#087cff neon cyan-blue,
+   #ff5265 risk red, #35e0a4 safe green, #ffc958 accent gold.
+   Motifs: luminous shield, radar/orbit, glass panels, circuit grid,
+   cyan safe-state glow + red threat-state glow. Keep UI text/buttons as HTML. */
+body.master-v3{background:
+  radial-gradient(circle at 78% 13%,#07508a55 0,transparent 29%),
+  radial-gradient(circle at 16% 35%,#06345b3d 0,transparent 28%),
+  linear-gradient(180deg,#010612,#021326 58%,#010711)}
+.mv3-nav{border-bottom-color:#1b638f;box-shadow:0 14px 38px #00101d80}
+.mv3-logo{filter:drop-shadow(0 0 12px #27d7ff)}
+.mv3-165{border-color:#ff5265!important;color:#fff!important;background:linear-gradient(135deg,#611329,#170a18);box-shadow:0 0 24px #ff40554d,inset 0 0 20px #ff405526}
+.mv3-hero{position:relative}
+.mv3-hero:before{content:"";position:absolute;right:-4%;top:3%;width:58%;height:92%;pointer-events:none;background:radial-gradient(circle,#25cfff18 0,transparent 58%);filter:blur(4px)}
+.mv3-copy h1{text-shadow:0 0 30px #0d8cff18}
+.mv3-live{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:inset 0 1px #ffffff12,0 14px 38px #0006}
+.mv3-shield{animation:mv3Float 4.8s ease-in-out infinite}
+.mv3-core{animation:mv3Pulse 2.7s ease-in-out infinite}
+@keyframes mv3Float{50%{transform:translateY(-15px)}}
+@keyframes mv3Pulse{50%{box-shadow:0 0 48px #20d5ff,inset 0 0 32px #087cff}}
+.mv3-quick,.mv3-card,.mv3-stats,.mv3-emergency,.mv3-support{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.mv3-card{border-color:color-mix(in srgb,var(--tool) 56%,#153c57);box-shadow:0 20px 48px #0008,inset 0 1px #ffffff14,inset 0 0 38px color-mix(in srgb,var(--tool) 9%,transparent)}
+.mv3-icon{box-shadow:inset 0 0 34px color-mix(in srgb,var(--tool) 22%,transparent),0 12px 30px #0009,0 0 22px color-mix(in srgb,var(--tool) 12%,transparent)}
+.mv3-stats{box-shadow:0 20px 46px #0006,inset 0 1px #ffffff0d}
+.mv3-help{background:radial-gradient(circle at 10% 90%,#087cff1c,transparent 45%)}
+.mv3-news{background:radial-gradient(circle at 92% 15%,#ff405512,transparent 36%)}
+.mv3-support{box-shadow:0 20px 48px #0006,inset 0 1px #ffffff0d}
+@media(max-width:760px){
+ .mv3-hero:before{width:100%;right:-30%;opacity:.72}
+ .mv3-shield{animation:mv3FloatMobile 4.8s ease-in-out infinite}
+ @keyframes mv3FloatMobile{50%{transform:translateY(-15px)}}
+}
