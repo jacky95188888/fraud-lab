@@ -1,0 +1,47 @@
+name: Fraud Lab smoke
+
+on:
+  pull_request:
+    paths:
+      - "index.html"
+      - "master-v3.css"
+      - "master-v3.js"
+      - "quickscan-v2.js"
+      - "sw.js"
+      - "fraud-lab-share.svg"
+      - ".github/workflows/fraud-lab-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JavaScript syntax
+        run: |
+          node --check master-v3.js
+          node --check quickscan-v2.js
+          node --check sw.js
+      - name: Required anti-fraud hooks
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'id="qText"' index.html
+          grep -q 'id="qBtn"' index.html
+          grep -q 'id="mbAI"' index.html
+          grep -q 'class="tabs"' index.html
+          grep -q 'master-v3.css?v=20' index.html
+          grep -q 'master-v3.js?v=20' index.html
+          grep -q 'fraud-lab-master-v20' sw.js
+          grep -q 'master-v3.css?v=20' sw.js
+          grep -q 'master-v3.js?v=20' sw.js
+          grep -q 'quickscan-v2.js?v=19' sw.js
+      - name: Visual V4 assets
+        run: |
+          test -s fraud-lab-share.svg
+          test -s docs/visual-dna-v4.md
+          grep -q 'FRAUD LAB VISUAL V4' master-v3.css
+          grep -q 'V4 inner tools' master-v3.css
