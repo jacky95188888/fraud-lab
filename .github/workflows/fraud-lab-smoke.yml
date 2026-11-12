@@ -35,10 +35,13 @@ jobs:
           grep -q 'class="tabs"' index.html
           grep -q 'master-v3.css?v=20' index.html
           grep -q 'master-v3.js?v=20' index.html
-          grep -q 'fraud-lab-master-v20' sw.js
-          grep -q 'master-v3.css?v=20' sw.js
-          grep -q 'master-v3.js?v=20' sw.js
-          grep -q 'quickscan-v2.js?v=19' sw.js
+          grep -q 'quickscan-v2.js?v=19' index.html
+          grep -q 'getRegistrations' index.html
+          ! grep -q 'serviceWorker.register' index.html
+          ! grep -q 'controllerchange' index.html
+          ! grep -q 'location.reload()' index.html
+          ! grep -q 'addEventListener("fetch"' sw.js
+          grep -q 'registration.unregister' sw.js
       - name: Visual V4 assets
         run: |
           test -s fraud-lab-share.svg
