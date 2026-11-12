@@ -14,6 +14,9 @@ const PAY_RE=/(運費|工本費|手續費|付款|支付|匯款|轉帳|刷卡|信
 const FREE_RE=/(免費|贈送|送你|送我|送.{0,6}(釣竿|禮物|贈品|商品)|只要.{0,8}(運費|工本費)|領取|贈品)/i;
 const SENSITIVE_RE=/(驗證碼|OTP|卡號|有效期限|背面三碼|CVV|網銀|帳號密碼|下載.{0,6}(APP|應用程式)|安裝.{0,6}(APP|應用程式))/i;
 const PRESSURE_RE=/(立即|馬上|限時|24小時|逾期|最後通知|現在就)/i;
+// 假冒戶政／身分遭冒用劇本：聲稱有人持身分證申請戶籍謄本，常接續假警察轉接。
+const FAKE_HOUSEHOLD_AUTHORITY_RE=/(?:有人|他人|別人|不明人士|陌生人).{0,24}(?:拿|持有|使用|冒用|盜用).{0,16}(?:身分證|身份證|個人資料|身分資料)|(?:身分證|身份證|個人資料|身分資料).{0,20}(?:遭冒用|被冒用|被盜用|被拿去).{0,24}(?:戶籍謄本|戶政|戶籍資料|申請)|(?:戶籍謄本|戶籍資料|戶政事務所).{0,30}(?:有人|他人|別人|冒用|身分證|身份證|出生年月日|申請)/i;
+const FAKE_POLICE_TRANSFER_RE=/(?:轉接|轉給|移轉|幫你接通|接著由).{0,16}(?:警察|警方|刑警|檢察官|地檢署|偵查隊)|(?:警察|警方|檢察官|地檢署).{0,16}(?:要你|要求你|請你).{0,12}(?:配合|調查|做筆錄)/i;
 function hostOf(raw){try{let u=raw;if(!/^https?:\/\//i.test(u))u='https://'+u;return new URL(u).hostname.toLowerCase().replace(/^www\./,'')}catch{return ''}}
 function isOfficialForBrand(host,text){
   if(/(宅急便|黑貓|t[- ]?cat)/i.test(text)) return host==='t-cat.com.tw'||host.endsWith('.t-cat.com.tw');
@@ -33,6 +36,11 @@ function scan(raw){
     if(SHORT_RE.test(u))add(20,'使用短網址隱藏真正目的地。');
     if(RISK_TLD_RE.test(h))add(20,`網址 ${h} 使用較需警戒的網域尾碼，不能只看網址裡是否有品牌名稱。`);
     if(BRAND_RE.test(text)&&!isOfficialForBrand(h,text))add(38,`訊息提到知名品牌／物流，但連結網域是 ${h}，與對應官方網域不一致，疑似品牌冒充或假物流頁。`);
+  }
+  if(FAKE_HOUSEHOLD_AUTHORITY_RE.test(text)){
+    score=100;
+    if(!flags.includes('對方聲稱有人冒用身分證／個資申請戶籍謄本，符合假冒戶政機關常見詐騙劇本；應立即停止通話並自行向官方戶政機關查證。'))flags.push('對方聲稱有人冒用身分證／個資申請戶籍謄本，符合假冒戶政機關常見詐騙劇本；應立即停止通話並自行向官方戶政機關查證。');
+    if(FAKE_POLICE_TRANSFER_RE.test(text)&&!flags.includes('接續轉接假警察／檢察官是常見二階段詐騙手法。'))flags.push('接續轉接假警察／檢察官是常見二階段詐騙手法。');
   }
   if(SENSITIVE_RE.test(text))add(32,'要求提供驗證碼、卡片資料、密碼或安裝 APP，屬高風險操作。');
   if(PRESSURE_RE.test(text))add(12,'訊息帶有催促或限時壓力，可能是在降低你查證的時間。');
