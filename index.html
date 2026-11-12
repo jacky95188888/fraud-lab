@@ -785,13 +785,18 @@ const ml=document.createElement("link");
 ml.rel="manifest";
 ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:"application/json"}));
 document.head.appendChild(ml);
+// Safari 穩定性修復：停用舊版快取攔截，避免舊 Service Worker 造成重複載入。
 if("serviceWorker" in navigator){
-  navigator.serviceWorker.addEventListener("controllerchange",()=>{
-    if(sessionStorage.getItem("fraud-lab-v20-reloaded"))return;
-    sessionStorage.setItem("fraud-lab-v20-reloaded","1");
-    location.reload();
-  });
-  window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(reg=>reg.update()).catch(()=>{}));
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.getRegistrations()
+      .then(regs=>Promise.all(regs.map(reg=>reg.unregister())))
+      .catch(()=>{});
+    if("caches" in window){
+      caches.keys()
+        .then(keys=>Promise.all(keys.filter(key=>key.startsWith("fraud-lab-")).map(key=>caches.delete(key))))
+        .catch(()=>{});
+    }
+  },{once:true});
 }
 </script>
 <script src="./master-v3.js?v=20" defer></script>
